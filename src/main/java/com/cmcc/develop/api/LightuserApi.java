@@ -57,7 +57,7 @@ public class LightuserApi extends BaseController{
     			for(Music m:allmusicLIst){
     				musicobject.put("id", m.getId());
     				musicobject.put("name", m.getTitle());
-    				musicobject.put("musicurl", ResourceUploadUtil.getFileBasePath(request)+"/"+(new ResourceService().get(Long.valueOf(m.getVideourl())).getResPath()));
+    				musicobject.put("musicurl", ResourceUploadUtil.getFileBasePath(request)+""+(new ResourceService().get(Long.valueOf(m.getVideourl())).getResPath()));
     				musicarray.put(musicobject);
     			}
     		}
@@ -124,7 +124,7 @@ public class LightuserApi extends BaseController{
     	       light = lightservice.get(user.getLight().getId());
     		}
     		all.put("lightCode", light==null?"":light.getInstructions());
-    		all.put("musicurl",music==null?"":ResourceUploadUtil.getFileBasePath(request)+"/"+(new ResourceService().get(Long.valueOf(music.getVideourl())).getResPath()));
+    		all.put("musicurl",music==null?"":ResourceUploadUtil.getFileBasePath(request)+""+(new ResourceService().get(Long.valueOf(music.getVideourl())).getResPath()));
     	}catch(Exception e){
     		e.printStackTrace();
     	}
