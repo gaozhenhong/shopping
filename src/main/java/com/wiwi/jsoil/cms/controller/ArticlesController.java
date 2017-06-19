@@ -65,7 +65,8 @@ public class ArticlesController extends BaseController
   }
   
   @RequestMapping({"add.do"})
-  public String addView(Model model) { model.addAttribute("list", getArticleCategoryList());
+  public String addView(Model model) {
+	model.addAttribute("list", getArticleCategoryList());
     model.addAttribute("instance", new Articles());
 
     return "thymeleaf/cms/articles/articlesAdd";

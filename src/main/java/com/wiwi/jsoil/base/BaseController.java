@@ -40,12 +40,12 @@ public class BaseController
     request.setAttribute("ex", ex);
 
     if (ex instanceof ReadCustomSQLException)
-      return "/sys/errors/error";
+      return "thymeleaf//sys/errors/error";
     if (ex instanceof DaoException)
-      return "/sys/errors/error";
+      return "thymeleaf//sys/errors/error";
 
     if (ex instanceof RenderException)
-      return "/sys/errors/error";
+      return "thymeleaf//sys/errors/error";
 
     if (ex instanceof NoLoginException) {
       setOperationMessage("登录失效，没访问权限，请重新登录！");
@@ -54,7 +54,7 @@ public class BaseController
       setOperationMessage("会员登录失效，没访问权限，请重新登录！");
       return "redirect:/mobile/member/login";
     }
-    return "/sys/errors/error";
+    return "thymeleaf//sys/errors/error";
   }
 
   protected static HttpSession getSession()
@@ -73,6 +73,7 @@ public class BaseController
     User user = null;
     try {
       LoginLog loginLog = (LoginLog)getSession().getAttribute("LoGiNsEsSiOnKeY");
+      System.out.println("=="+loginLog);
       user = loginLog.getUser();
     } catch (Exception e) {
       e.printStackTrace();

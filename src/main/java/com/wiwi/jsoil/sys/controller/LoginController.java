@@ -68,6 +68,8 @@ public class LoginController extends BaseController
       loginLog.setLoginTime(new Date());
       loginLog.setClientIp(getRequest().getRemoteAddr());
       loginLog.setClientHost(getRequest().getRemoteHost());
+      logger.info("loginLog", loginLog);
+      logger.info("user", user);
       session.setAttribute("LoGiNsEsSiOnKeY", loginLog);
       model.addAttribute("user", user);
       String beforeLoginUrl = (String)getRequest().getSession().getAttribute("BeFoReLoGiNuRl");

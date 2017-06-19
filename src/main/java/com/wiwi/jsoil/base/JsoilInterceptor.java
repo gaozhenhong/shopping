@@ -73,11 +73,8 @@ public class JsoilInterceptor
     {
       HttpSession session = request.getSession();
       LoginLog loginLog = (LoginLog)session.getAttribute("LoGiNsEsSiOnKeY");
-      logger.debug("==222222222"+loginLog+(loginLog != null));
       if (loginLog != null) {
-          logger.debug("333==222222222"+loginLog);
         User user = loginLog.getUser();
-        logger.debug("user.loginName"+user.getLoginName());
         if (user != null) {
           request.setAttribute("user", user);
           if (AppConstants.LOG_OPERATE)
@@ -99,35 +96,40 @@ public class JsoilInterceptor
 
   private boolean isGuestPermission(HttpServletRequest request)
   {
-    String requestURI = request.getRequestURI();
-    String baseName = request.getContextPath();
-    if ((requestURI.equalsIgnoreCase(baseName)) || (requestURI.equalsIgnoreCase(baseName + "/"))) {
-      return true;
-    }
-
-    for (Iterator localIterator1 = guestPermissionFileList.iterator(); localIterator1.hasNext(); ) { String guestPermissionFile = (String)localIterator1.next();
-      if (requestURI.endsWith(guestPermissionFile))
-        return true;
-
-      if (requestURI.indexOf("/login") <= 0) 
-        return true;
-    }
-
-    List guestPermissionList = new ArrayList();
-    String guestPath = AppConstants.GUEST_PERMISSION;
-    if ((guestPath != null) && (guestPath.trim().length() > 0))
-      guestPermissionList.addAll(Arrays.asList(AppConstants.GUEST_PERMISSION.split(",")));
-
-    guestPermissionList.add("/resources/");
-    guestPermissionList.add("/uploadFile/");
-    guestPermissionList.add("/site/");
-    guestPermissionList.add("/pano/");
-    logger.info(guestPermissionList.toString());
-    for (Iterator localIterator2 = guestPermissionList.iterator(); localIterator2.hasNext(); ) { String guestPermissionPath = (String)localIterator2.next();
-      if (!(requestURI.startsWith(baseName + guestPermissionPath))) 
-         return true;
-    }
-
-    return false;
+		String requestURI = request.getRequestURI();
+		String baseName = request.getContextPath();
+		if(requestURI.equalsIgnoreCase(baseName) || requestURI.equalsIgnoreCase(baseName+"/")){
+			return true;
+		}
+		
+		for(String guestPermissionFile : guestPermissionFileList){
+			if( requestURI.endsWith(guestPermissionFile)){
+				return true;
+			}
+			
+			if( requestURI.indexOf("/login")>-1){
+				return true;
+			}
+		}
+		
+		List <String> guestPermissionList = new ArrayList<String>();
+		String guestPath = AppConstants.GUEST_PERMISSION;
+		if(guestPath != null && guestPath.trim().length()>0){
+			guestPermissionList.addAll(Arrays.asList(AppConstants.GUEST_PERMISSION.split(",")));
+		}
+		guestPermissionList.add("/resources/");
+		guestPermissionList.add("/uploadFile/");
+		guestPermissionList.add("/site/");
+		guestPermissionList.add("/pano/");
+		guestPermissionList.add("/api/");
+		
+		logger.info(guestPermissionList.toString());
+		for(String guestPermissionPath : guestPermissionList){
+			if( requestURI.startsWith(baseName+guestPermissionPath)){
+				return true;
+			}
+		}
+		
+		return false;
   }
 }

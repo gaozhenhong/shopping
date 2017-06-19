@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8" />
+		<title>音乐管理---查看</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<!-- basic styles -->
+		<link th:href="@{/resources/bootstrap-3.3.2/css/bootstrap.min.css}" rel="stylesheet" />
+		<link th:href="@{/resources/font-awesome/3.2.1/css/font-awesome.min.css}" rel="stylesheet" />
+		<link th:href="@{/resources/font-awesome/4.2.0/css/font-awesome.min.css}" rel="stylesheet" />
+		<!-- page specific plugin styles -->
+		<link th:href="@{/resources/ace/css/ace.min.css}" rel="stylesheet" />
+		<link th:href="@{/resources/jsoil/css/wiwi-jsoil.css}" rel="stylesheet" />
+	</head>
+
+	<body style="background-color: white;">
+		<!-- PAGE CONTENT BEGINS -->
+		<div class="row page-content">
+			<div class="col-xs-12 tabbable">
+				<div class="tab-content">
+					<div class="tab-pane in active">
+						<form action="#" class="form-horizontal" role="form">
+							<input type="hidden"  th:field="${instance.id}"/>
+						     <div class='form-group'>
+                                <label class='col-sm-3 control-label no-padding-right'> 音乐文件 </label>
+                                <div class='col-sm-9'>
+                                    <a target="_blank" th:if="${musicFile}" th:href="@{${musicFile.resPath}}">
+                                    <span th:text="${musicFile.resPath}">下载</span>
+                                    <i class="icon-download-alt bigger-125 blue"></i>
+                                    </a>
+                                </div>
+                            </div>
+							<div class='form-group'>
+								<label class='col-sm-3 control-label no-padding-right'> 标题 </label>
+								<div class='col-sm-9'>
+									<input type='text' th:field='${instance.title}' placeholder='标题' class='col-xs-10 col-sm-5' />
+								</div>
+							</div>
+							<div class='form-group'>
+								<label class='col-sm-3 control-label no-padding-right'> 描述 </label>
+								<div class='col-sm-9'>
+									<input type='text' th:field='${instance.describle}' placeholder='描述' class='col-xs-10 col-sm-5' />
+								</div>
+							</div>
+							<div class="clearfix form-actions">
+                                <div class="col-md-offset-3 col-md-9">                   
+                                    <a th:href="@{/develop/music/list.do}" class="btn btn-prev">
+                                        <i class="icon-arrow-left"></i>
+                                                                                                                                  返回
+                                    </a>
+                                </div>
+                            </div>
+						</form>
+					</div>
+				</div>
+			</div><!-- /.col -->
+		</div><!-- /.row -->
+	
+		<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+			<i class="icon-double-angle-up icon-only bigger-110"></i>
+		</a>
+	</body>
+</html>

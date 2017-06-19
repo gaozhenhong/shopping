@@ -527,6 +527,8 @@ public class DbAdapter {
 				}
 			}
 			String sql = "insert into " + tableName + " (" + fieldStr + ") VALUES(" + preParedStr + ")";
+			
+			System.out.println("sql"+sql);
 			excuteInsertSql(sql, id, preparedValueList);
 
 		} catch (IntrospectionException e) {

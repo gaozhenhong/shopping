@@ -45,6 +45,7 @@ public class FileUploadController extends BaseController
   @RequestMapping({"imgUpload.do"})
   public String imgUpload(@RequestParam(value="imgId", required=false) Long imgId, @RequestParam(value="imgUrl", required=false) String imgUrl, @RequestParam(value="folder", required=false) String folder, @RequestParam(value="cropPresets", required=false) String cropPresets, Model model) throws Exception
   {
+	  User user = getUser();
     model.addAttribute("imgId", imgId);
     model.addAttribute("cropPresets", cropPresets);
     model.addAttribute("folder", folder);
@@ -52,10 +53,12 @@ public class FileUploadController extends BaseController
     model.addAttribute("imgUrl", basePath + imgUrl);
     model.addAttribute("fileViewUrl", basePath);
     model.addAttribute("uploadPath", ResourceUploadUtil.getServerURI(getRequest()) + "/sys/file/uploadAction.do");
-    logger.debug("图片上传路径为{}", "/sys/file/uploadAction.do");
+    User user1 = getUser();
+    logger.debug(user1+"图片上传路径为{}", "sys/file/uploadAction.do"+"=="+ResourceUploadUtil.getServerURI(getRequest()) + "/sys/file/uploadAction.do");
     processOperationMessage(model);
-
-    return "/sys/resource/imgUpload";
+    User user2 = getUser();
+    logger.debug(user2+"");
+    return "thymeleaf/sys/resource/imgUpload";
   }
 
   @RequestMapping({"uploadAction.do"})
