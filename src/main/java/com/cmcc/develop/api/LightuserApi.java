@@ -35,18 +35,21 @@ public class LightuserApi extends BaseController{
 
 
     @RequestMapping(value = "getAll.do")
-    public String list(HttpServletRequest request) throws Exception {
+    public String list(@RequestParam String usercode,@RequestParam String type,HttpServletRequest request) throws Exception {
         JSONObject all = new JSONObject();
     	try{
     		JSONArray lightarray = new JSONArray();
     		JSONObject lightobject = new JSONObject();
-    		List<Light>allLightList = lightservice.getList();
+    		List<Light> lights = lightservice.getListByUsercodeAndType(usercode, type);
     		
-    		if(allLightList!=null&&allLightList.size()>0){
-    			for(Light l:allLightList){
-    				lightobject.put("id", l.getId());
-    				lightobject.put("name", l.getTitle());
-    				lightarray.put(lightobject);
+    		if(lights!=null&&lights.size()>0){
+    			for(Light l:lights){
+        			lightobject.put("id", l.getId());
+        			lightobject.put("name", l.getTitle());
+        			lightobject.put("describle", l.getDescrible());
+        			lightobject.put("type", l.getStatus());
+        			lightobject.put("instructions", l.getInstructions());
+        			lightarray.put(lightobject);
     			}
     		}
     		
@@ -126,6 +129,30 @@ public class LightuserApi extends BaseController{
     		all.put("status", user.getStatus());
     		all.put("lightCode", light==null?"":light.getInstructions());
     		all.put("musicurl",music==null?"":ResourceUploadUtil.getFileBasePath(request)+""+(new ResourceService().get(Long.valueOf(music.getVideourl())).getResPath()));
+    	}catch(Exception e){
+    		e.printStackTrace();
+    	}
+        return all.toString();
+    }
+    
+    
+    
+    @RequestMapping(value = "getAllSelectLight.do")
+    public String getAllSelectLight(@RequestParam String usercode,@RequestParam String type,HttpServletRequest request) throws Exception {
+        JSONObject all = new JSONObject();
+    	JSONArray lightarray = new JSONArray();
+		
+    	try{
+    		List<Light> lights = lightservice.getListByUsercodeAndType(usercode, type);
+    		for(Light l:lights){
+    			JSONObject lightobject = new JSONObject();
+    			lightobject.put("id", l.getId());
+    			lightobject.put("title", l.getTitle());
+    			lightobject.put("describle", l.getDescrible());
+    			lightobject.put("type", l.getStatus());
+    			lightobject.put("instructions", l.getInstructions());
+    			lightarray.put(lightobject);//放入
+    		}
     	}catch(Exception e){
     		e.printStackTrace();
     	}

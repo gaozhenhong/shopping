@@ -15,8 +15,31 @@ public class Light{
     private String title;
 
     private String describle;
+    
+    private String  usercode;
+    
+    private String status;
 
-    public String getId() {
+
+
+
+	public String getUsercode() {
+		return usercode;
+	}
+
+	public void setUsercode(String usercode) {
+		this.usercode = usercode;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getId() {
         return this.id;
     }
 

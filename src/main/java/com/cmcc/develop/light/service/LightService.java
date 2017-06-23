@@ -46,4 +46,10 @@ public class LightService {
     	LightQ query = new LightQ();
     	return dao.getList(query);
     }
+    
+    public List<Light> getListByUsercodeAndType(String userCode,String type) throws DaoException,RenderException {
+    	LightDao dao = new LightDao();
+
+    	return dao.getList(userCode,type);
+    }
 }

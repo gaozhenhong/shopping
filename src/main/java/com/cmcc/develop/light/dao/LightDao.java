@@ -52,5 +52,15 @@ public class LightDao extends DaoBase {
         sql = "select * FROM d_light";
         return DbAdapter.getList(sql, Light.class);
     }
+    
+    public List<Light> getList(String usercode,String type) throws DaoException,RenderException {
+        sql = "select * FROM d_light where ";
+        if(type.equals("1")){
+        	sql+=" status = '1'";
+        }else{
+        	sql+=" status ='1' and usercode ='"+usercode+"'";
+        }
+        return DbAdapter.getList(sql, Light.class);
+    }
 
 }

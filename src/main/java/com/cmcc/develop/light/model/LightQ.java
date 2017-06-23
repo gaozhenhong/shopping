@@ -17,7 +17,30 @@ public class LightQ extends PageUtil {
 
     private String describle;
 
-    public String toWhereString() {
+    private String usercode;
+    
+
+    
+    private String status;
+    
+
+	public String getUsercode() {
+		return usercode;
+	}
+
+	public void setUsercode(String usercode) {
+		this.usercode = usercode;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String toWhereString() {
 
         parameterList.clear();
 
@@ -48,6 +71,16 @@ public class LightQ extends PageUtil {
             parameterList.add('%' + describle + '%'); 
         }
 
+        if (usercode != null && !usercode.equalsIgnoreCase("")){
+            sqlStr += " AND usercode like ?";
+            parameterList.add('%' + usercode + '%'); 
+        }
+          
+        
+        if (status != null && !status.equalsIgnoreCase("")){
+            sqlStr += " AND status like ?";
+            parameterList.add('%' + status + '%'); 
+        }
         return sqlStr;
     }
 

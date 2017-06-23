@@ -1,17 +1,20 @@
 package com.cmcc.develop.light.controller;
 
+import java.util.Date;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.wiwi.jsoil.base.BaseController;
 import com.cmcc.develop.light.model.Light;
 import com.cmcc.develop.light.model.LightQ;
 import com.cmcc.develop.light.service.LightService;
+import com.wiwi.jsoil.base.BaseController;
+import com.wiwi.jsoil.sys.model.User;
 
 @Controller
 @RequestMapping(value = "/develop/light/")
@@ -50,7 +53,7 @@ public class LightController extends BaseController{
 
     @RequestMapping(value = "addAction.do")
     public String addAction(@ModelAttribute(value="instance") Light instance,Model model) throws Exception {
-
+    	instance.setStatus("1");//公共
         service.insert(instance);
 
         setOperationMessage("添加成功！");
@@ -72,7 +75,7 @@ public class LightController extends BaseController{
 
     @RequestMapping(value = "editAction.do")
     public String editAction(@ModelAttribute(value="instance") Light instance,Model model) throws Exception {
-
+    	
         service.update(instance);
 
         setOperationMessage("修改成功！");

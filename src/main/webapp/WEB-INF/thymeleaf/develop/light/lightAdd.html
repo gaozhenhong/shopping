@@ -38,6 +38,12 @@
 								</div>
 							</div>
 							 <div class='form-group'>
+                                <label class='col-sm-3 control-label no-padding-right'> 操作灯光用户编码</label>
+                                <div class='col-sm-9'>
+                                    <input type='text' th:field='${instance.usercode}' placeholder='用户编码' class='col-xs-10 col-sm-5' />
+                                </div>
+                            </div>
+							 <div class='form-group'>
                                 <label class='col-sm-3 control-label no-padding-right'> 操作指令 </label>
                                 <div class='col-sm-9'>
                                      <textarea rows="5" cols="10" th:field='${instance.instructions}' 
