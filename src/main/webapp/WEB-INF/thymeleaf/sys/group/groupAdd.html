@@ -20,7 +20,7 @@
 		<!-- PAGE CONTENT BEGINS -->
 		<div class="row page-content">
 			<div class="col-xs-12 tabbable">
-				<ul th:include="thymeleaf/ragment :: topTab('add','用户组','/sys/group/')" class="nav nav-tabs padding-12 tab-color-blue background-blue" id="myTab" ></ul>
+				<ul th:include="thymeleaf/fragment :: topTab('add','用户组','/sys/group/')" class="nav nav-tabs padding-12 tab-color-blue background-blue" id="myTab" ></ul>
 				<div class="tab-content">
 					<div class="tab-pane in active">
 						<form id="validation-form"  action="#" th:action="@{/sys/group/addAction.do}" th:object="${instance}" class="form-horizontal" role="form">
