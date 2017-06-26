@@ -38,7 +38,7 @@ public class GroupDao extends DaoBase
     DbAdapter.executeUpdate(this.sql);
   }
 
-  public Group get(int id) throws DaoException, RenderException {
+  public Group get(String id) throws DaoException, RenderException {
     this.sql = "select * FROM s_group WHERE id ='" + id + "'";
     return ((Group)DbAdapter.get(this.sql, Group.class));
   }
@@ -50,33 +50,34 @@ public class GroupDao extends DaoBase
     return DbAdapter.getList(this.sql, pageUtil, Group.class);
   }
 
-  public void addUserToGroup(int groupId, Long[] userIds)
+  public void addUserToGroup(String groupId, Long[] userIds)
     throws DaoException
   {
     Long[] arrayOfLong = userIds; int j = userIds.length; for (int i = 0; i < j; ++i) { Long userId = arrayOfLong[i];
       this.sql = "insert into S_GroupUser (GroupId,UserId) VALUES(?,?)";
-      DbAdapter.executeUpdate(this.sql, new Object[] { Integer.valueOf(groupId), userId });
+      DbAdapter.executeUpdate(this.sql, new Object[] { groupId, userId });
     }
   }
 
-  public void removeUserFromGroup(int groupId, Long[] userIds)
+  public void removeUserFromGroup(String groupId, Long[] userIds)
     throws DaoException
   {
     Long[] arrayOfLong = userIds; int j = userIds.length; for (int i = 0; i < j; ++i) { Long userId = arrayOfLong[i];
       this.sql = "delete from S_GroupUser where groupId=? and userId=?";
-      DbAdapter.executeUpdate(this.sql, new Object[] { Integer.valueOf(groupId), userId });
+      DbAdapter.executeUpdate(this.sql, new Object[] { groupId, userId });
     }
   }
 
-  public void updateGroupModule(int groupId, String[] moduleIds)
+  public void updateGroupModule(String groupId, String[] moduleIds)
     throws DaoException
   {
+	System.out.println("groupId"+groupId);
     this.sql = "delete from s_groupmodule where groupId=?";
-    DbAdapter.executeUpdate(this.sql, new Object[] { Integer.valueOf(groupId) });
+    DbAdapter.executeUpdate(this.sql, new Object[] {groupId });
 
     this.sql = "insert into s_groupmodule (groupId,moduleId) VALUES(?,?)";
     String[] arrayOfString = moduleIds; int j = moduleIds.length; for (int i = 0; i < j; ++i) { String moduleId = arrayOfString[i];
-      DbAdapter.executeUpdate(this.sql, new Object[] { Integer.valueOf(groupId), new Integer(moduleId) });
+      DbAdapter.executeUpdate(this.sql, new Object[] { groupId, new Integer(moduleId) });
     }
   }
 

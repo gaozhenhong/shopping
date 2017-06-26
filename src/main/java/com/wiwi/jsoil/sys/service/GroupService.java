@@ -39,7 +39,7 @@ public class GroupService
     dao.delete(ids);
   }
   
-  public Group get(int id)
+  public Group get(String id)
     throws DaoException, RenderException
   {
     GroupDao dao = new GroupDao();
@@ -64,7 +64,7 @@ public class GroupService
     return dao.getList(query);
   }
   
-  public void addUserToGroup(int groupId, String userIds)
+  public void addUserToGroup(String groupId, String userIds)
     throws DaoException
   {
     if (userIds == null) {
@@ -85,7 +85,7 @@ public class GroupService
     dao.addUserToGroup(groupId, idLongs);
   }
   
-  public void removeUserFromGroup(int groupId, String userIds)
+  public void removeUserFromGroup(String groupId, String userIds)
     throws DaoException
   {
     if (userIds == null) {
@@ -106,7 +106,7 @@ public class GroupService
     dao.removeUserFromGroup(groupId, idLongs);
   }
   
-  public void updateGroupModule(int groupId, String moduleIdStrs)
+  public void updateGroupModule(String groupId, String moduleIdStrs)
     throws DaoException
   {
     if ((moduleIdStrs == null) || (moduleIdStrs.length() < 1)) {

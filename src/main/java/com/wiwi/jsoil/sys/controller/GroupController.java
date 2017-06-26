@@ -73,7 +73,7 @@ public class GroupController extends BaseController
     model.addAttribute("list", userService.getList(query));
 
     model.addAttribute("pager", query);
-    Group chooseGroup = this.service.get(new Integer(query.getGroupId()).intValue());
+    Group chooseGroup = this.service.get(query.getGroupId());
     model.addAttribute("chooseGroup", chooseGroup);
     return "thymeleaf/sys/group/groupUserList";
   }
@@ -86,14 +86,14 @@ public class GroupController extends BaseController
     model.addAttribute("list", userService.getList(query));
 
     model.addAttribute("pager", query);
-    Group chooseGroup = this.service.get(new Integer(query.getGroupIdNotIn()).intValue());
+    Group chooseGroup = this.service.get(query.getGroupIdNotIn());
     model.addAttribute("chooseGroup", chooseGroup);
     return "thymeleaf/sys/group/notGroupUserList";
   }
 
   @RequestMapping({"addUserToGroupAction.do"})
   @ResponseBody
-  public String addUserToGroupAction(@RequestParam(value="ids", required=true) String ids, @RequestParam(value="groupId", required=true) int groupId, Model model)
+  public String addUserToGroupAction(@RequestParam(value="ids", required=true) String ids, @RequestParam(value="groupId", required=true) String groupId, Model model)
     throws Exception
   {
     this.service.addUserToGroup(groupId, ids);
@@ -103,17 +103,17 @@ public class GroupController extends BaseController
   }
 
   @RequestMapping({"removeUserFromGroupAction.do"})
-  public String removeUserFromGroupAction(@RequestParam(value="ids", required=true) String ids, @RequestParam(value="groupId", required=true) int groupId, Model model) throws Exception
+  public String removeUserFromGroupAction(@RequestParam(value="ids", required=true) String ids, @RequestParam(value="groupId", required=true) String groupId, Model model) throws Exception
   {
     this.service.removeUserFromGroup(groupId, ids);
-    model.addAttribute("groupId", Integer.valueOf(groupId));
+    model.addAttribute("groupId", groupId);
     model.addAttribute("chooseGroup", this.service.get(groupId));
     setOperationMessage("从用户组中删除用户操作成功！");
     return "redirect:groupUserList.do";
   }
 
   @RequestMapping({"groupModuleList.do"})
-  public String groupModuleList(@RequestParam(value="groupId", required=false) Integer groupId, Model model)
+  public String groupModuleList(@RequestParam(value="groupId", required=false) String groupId, Model model)
     throws Exception
   {
     GroupQ groupQ = new GroupQ();
@@ -122,10 +122,10 @@ public class GroupController extends BaseController
     model.addAttribute("list", groupList);
 
     Group group = null;
-    if ((groupId == null) || (groupId.intValue() == 0))
+    if ((groupId == null) || (groupId.equals("")))
       group = (Group)groupList.get(0);
     else
-      group = this.service.get(groupId.intValue());
+      group = this.service.get(groupId);
 
     model.addAttribute("chooseGroup", group);
     processOperationMessage(model);
@@ -133,7 +133,7 @@ public class GroupController extends BaseController
   }
 
   @RequestMapping({"addModuleToGroupAction.do"})
-  public String addModuleToGroupAction(@RequestParam(value="choosedNode", required=true) String choosedNode, @RequestParam(value="chooseGroupId", required=true) int groupId, Model model)
+  public String addModuleToGroupAction(@RequestParam(value="choosedNode", required=true) String choosedNode, @RequestParam(value="chooseGroupId", required=true) String groupId, Model model)
     throws Exception
   {
     this.service.updateGroupModule(groupId, choosedNode);
@@ -162,7 +162,7 @@ public class GroupController extends BaseController
   }
 
   @RequestMapping({"edit.do"})
-  public String editView(@RequestParam int id, Model model)
+  public String editView(@RequestParam String id, Model model)
     throws Exception
   {
     model.addAttribute("instance", this.service.get(id));
@@ -181,7 +181,7 @@ public class GroupController extends BaseController
   }
 
   @RequestMapping({"view.do"})
-  public String view(@RequestParam int id, Model model)
+  public String view(@RequestParam String id, Model model)
     throws Exception
   {
     model.addAttribute("instance", this.service.get(id));
