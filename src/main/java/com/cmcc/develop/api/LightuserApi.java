@@ -35,21 +35,32 @@ public class LightuserApi extends BaseController{
 
 
     @RequestMapping(value = "getAll.do")
-    public String list(@RequestParam String usercode,@RequestParam String type,HttpServletRequest request) throws Exception {
+    public String list(@RequestParam String usercode,HttpServletRequest request) throws Exception {
         JSONObject all = new JSONObject();
     	try{
-    		JSONArray lightarray = new JSONArray();
-    		JSONObject lightobject = new JSONObject();
-    		List<Light> lights = lightservice.getListByUsercodeAndType(usercode, type);
+    		JSONArray commonlightarray = new JSONArray();
+    		JSONArray privatelightarray = new JSONArray();
+    		List<Light> lights = lightservice.getListByUsercodeAndType(usercode, "");
     		
     		if(lights!=null&&lights.size()>0){
     			for(Light l:lights){
-        			lightobject.put("id", l.getId());
-        			lightobject.put("name", l.getTitle());
-        			lightobject.put("describle", l.getDescrible());
-        			lightobject.put("type", l.getStatus());
-        			lightobject.put("instructions", l.getInstructions());
-        			lightarray.put(lightobject);
+    				if(l.getStatus().equals("1")){
+    				      JSONObject lightobject = new JSONObject();
+        			      lightobject.put("id", l.getId());
+        			      lightobject.put("name", l.getTitle());
+        			      lightobject.put("describle", l.getDescrible());
+        			      lightobject.put("type", l.getStatus());
+        			      lightobject.put("instructions", l.getInstructions());
+        			      commonlightarray.put(lightobject);
+    				}else{
+    					  JSONObject lightobject = new JSONObject();
+            			  lightobject.put("id", l.getId());
+            			  lightobject.put("name", l.getTitle());
+            			  lightobject.put("describle", l.getDescrible());
+            			  lightobject.put("type", l.getStatus());
+            			  lightobject.put("instructions", l.getInstructions());
+            			  privatelightarray.put(lightobject);
+    				}
     			}
     		}
     		
@@ -65,7 +76,8 @@ public class LightuserApi extends BaseController{
     			}
     		}
     		
-    		all.put("lights", lightarray);
+    		all.put("commonlights", commonlightarray);
+    		all.put("privateights", privatelightarray);
     		all.put("musics", musicarray);
     		
     	}catch(Exception e){

@@ -57,8 +57,10 @@ public class LightDao extends DaoBase {
         sql = "select * FROM d_light where ";
         if(type.equals("1")){
         	sql+=" status = '1'";
+        }else if(type.equals("2")){
+        	sql+=" status ='2' and usercode ='"+usercode+"'";
         }else{
-        	sql+=" status ='1' and usercode ='"+usercode+"'";
+        	sql+="status='1' or (status='2' and usercode ='"+usercode+"' )";
         }
         return DbAdapter.getList(sql, Light.class);
     }
