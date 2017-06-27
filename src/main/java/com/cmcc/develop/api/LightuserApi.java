@@ -1,6 +1,8 @@
 package com.cmcc.develop.api;
 
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,10 +16,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cmcc.develop.light.model.Light;
 import com.cmcc.develop.light.service.LightService;
+import com.cmcc.develop.lighthistory.model.Lighthistory;
+import com.cmcc.develop.lighthistory.service.LighthistoryService;
 import com.cmcc.develop.lightuser.model.Lightuser;
 import com.cmcc.develop.lightuser.service.LightuserService;
 import com.cmcc.develop.music.model.Music;
 import com.cmcc.develop.music.service.MusicService;
+import com.cmcc.develop.musichistory.model.Musichistory;
+import com.cmcc.develop.musichistory.service.MusichistoryService;
 import com.wiwi.jsoil.base.BaseController;
 import com.wiwi.jsoil.sys.service.ResourceService;
 import com.wiwi.jsoil.util.ResourceUploadUtil;
@@ -97,6 +103,18 @@ public class LightuserApi extends BaseController{
     			user.setLight(light);
     		}
     		service.update(user);//更新
+    		
+    		Lighthistory lighthistory = new Lighthistory();
+    		lighthistory.setCreateDate(new Date());
+    		lighthistory.setDescrible(light.getDescrible());
+    		lighthistory.setInstructions(light.getInstructions());
+    		lighthistory.setStatus(light.getStatus());
+    		lighthistory.setTitle(light.getTitle());
+    		lighthistory.setUsercode(usercode);
+    		lighthistory.setId(UUID.randomUUID().toString());
+    		LighthistoryService s = new LighthistoryService();
+    		s.insert(lighthistory);
+    		//添加灯光历史
     		all.put("result", "操作成功");
     	}catch(Exception e){
     		e.printStackTrace();
@@ -115,6 +133,18 @@ public class LightuserApi extends BaseController{
     			user.setMusic(music);
     		}
     		service.update(user);//更新
+    		
+    		Musichistory musichistory = new Musichistory();
+    		musichistory.setId(UUID.randomUUID().toString());
+    		musichistory.setCreateDate(new Date());
+    		musichistory.setDescrible(music.getDescrible());
+    		musichistory.setTitle(music.getTitle());
+    		musichistory.setVideourl(music.getVideourl());
+    		musichistory.setUsercode(user.getUsercode());
+    		MusichistoryService s = new MusichistoryService();
+    		s.insert(musichistory);
+    		//添加灯光历史
+    		
     		all.put("result", "操作成功");
     	}catch(Exception e){
     		e.printStackTrace();

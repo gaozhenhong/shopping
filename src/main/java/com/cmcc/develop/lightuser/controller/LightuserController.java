@@ -1,6 +1,8 @@
 package com.cmcc.develop.lightuser.controller;
 
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,11 +12,17 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.cmcc.develop.light.model.Light;
 import com.cmcc.develop.light.service.LightService;
+import com.cmcc.develop.lighthistory.model.Lighthistory;
+import com.cmcc.develop.lighthistory.service.LighthistoryService;
 import com.cmcc.develop.lightuser.model.Lightuser;
 import com.cmcc.develop.lightuser.model.LightuserQ;
 import com.cmcc.develop.lightuser.service.LightuserService;
+import com.cmcc.develop.music.model.Music;
 import com.cmcc.develop.music.service.MusicService;
+import com.cmcc.develop.musichistory.model.Musichistory;
+import com.cmcc.develop.musichistory.service.MusichistoryService;
 import com.wiwi.jsoil.base.BaseController;
 
 @Controller
@@ -80,7 +88,31 @@ public class LightuserController extends BaseController{
     public String editAction(@ModelAttribute(value="instance") Lightuser instance,Model model) throws Exception {
 
         service.update(instance);
-
+        LightService lservice = new LightService();
+        Light light = lservice.get(instance.getLight().getId());
+		Lighthistory lighthistory = new Lighthistory();
+		lighthistory.setCreateDate(new Date());
+		lighthistory.setDescrible(light.getDescrible());
+		lighthistory.setInstructions(light.getInstructions());
+		lighthistory.setStatus(light.getStatus());
+		lighthistory.setTitle(light.getTitle());
+		lighthistory.setUsercode(instance.getUsercode());
+		lighthistory.setId(UUID.randomUUID().toString());
+		LighthistoryService s = new LighthistoryService();
+		s.insert(lighthistory);
+		
+		MusicService musicService = new MusicService();
+		Music music = musicService.get(instance.getMusic().getId());
+		Musichistory musichistory = new Musichistory();
+		musichistory.setId(UUID.randomUUID().toString());
+		musichistory.setCreateDate(new Date());
+		musichistory.setDescrible(music.getDescrible());
+		musichistory.setTitle(music.getTitle());
+		musichistory.setVideourl(music.getVideourl());
+		musichistory.setUsercode(instance.getUsercode());
+		MusichistoryService ms = new MusichistoryService();
+		ms.insert(musichistory);
+		
         setOperationMessage("修改成功！");
 
         return "redirect:list.do";
