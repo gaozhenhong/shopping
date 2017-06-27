@@ -59,9 +59,10 @@
 																						<th id='usercode' class="table-order-column">用户编码</th>
 									<th id='name' class="table-order-column">姓名</th>
 									<th id='telephone' class="table-order-column">电话号码</th>
-									<th id='light' class="table-order-column">灯的执行</th>
-									<th id='music' class="table-order-column">音乐执行</th>
-                                    <th id='status' class="table-order-column">状态</th>
+									<th id='light' class="table-order-column">灯光模式</th>
+									<th id='music' class="table-order-column">音乐模式</th>
+                                    <th id='status' class="table-order-column">音乐状态</th>
+                                    <th id='status' class="table-order-column">灯光状态</th>
 
 													<th></th>
 												</tr>
@@ -78,11 +79,19 @@
 																						<td th:text="${obj.usercode}">用户编码</td>
 									<td th:text="${obj.name}">姓名</td>
 									<td th:text="${obj.telephone}">电话号码</td>
-									<td th:text="${obj.light.title}">灯的执行</td>
-									<td th:text="${obj.music.title}">音乐执行指令主键</td>
+									<td th:text="${obj.light.title}">灯光模式</td>
+									<td th:text="${obj.music.title}">音乐模式</td>
                                      <td >
-                                                    <div th:switch="${obj.status}">
+                                                    <div th:switch="${obj.musicstatus}">
+                                                        <span th:case="0" >停止播放</span>
                                                         <span th:case="1" >暂停播放</span>
+                                                        <span th:case="2" >循环播放</span>
+                                                        <span th:case="*" class="label label-sm label-danger">未设置</span>
+                                         </div></td>
+                                           <td >
+                                                    <div th:switch="${obj.lstatus}">
+                                                        <span th:case="0" >停止</span>
+                                                        <span th:case="1" >循环</span>
                                                         <span th:case="*" class="label label-sm label-danger">未设置</span>
                                          </div></td>
 													<td >

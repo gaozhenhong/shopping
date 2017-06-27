@@ -25,7 +25,9 @@ public class LightuserQ extends PageUtil {
 
     private String name;
 
-    private Integer status;
+    private String musicstatus;
+    
+    private String lstatus;
 
     private String telephone;
 
@@ -76,10 +78,16 @@ public class LightuserQ extends PageUtil {
             parameterList.add('%' + name + '%'); 
         }
 
-        if (status != null && status != 0 ){
-            sqlStr += " AND status =?";
-            parameterList.add(status); 
+        if (musicstatus != null && !musicstatus.equals("") ){
+            sqlStr += " AND musicstatus like ?";
+            parameterList.add(musicstatus); 
         }
+        
+        if (lstatus != null && !lstatus.equals("") ){
+            sqlStr += " AND lstatus like ?";
+            parameterList.add(lstatus); 
+        }
+
 
         if (telephone != null && !telephone.equalsIgnoreCase("")){
             sqlStr += " AND telephone like ?";
@@ -104,7 +112,24 @@ public class LightuserQ extends PageUtil {
         return sqlStr;
     }
 
-    public String getId() {
+    public String getLstatus() {
+		return lstatus;
+	}
+
+	public void setLstatus(String lstatus) {
+		this.lstatus = lstatus;
+	}
+
+	public String getMusicstatus() {
+		return musicstatus;
+	}
+
+	public void setMusicstatus(String musicstatus) {
+		this.musicstatus = musicstatus;
+	}
+
+
+	public String getId() {
         return this.id;
     }
 
@@ -160,13 +185,6 @@ public class LightuserQ extends PageUtil {
         this.name=name;
     }
 
-    public Integer getStatus() {
-        return this.status;
-    }
-
-    public void setStatus (Integer status) {
-        this.status=status;
-    }
 
     public String getTelephone() {
         return this.telephone;

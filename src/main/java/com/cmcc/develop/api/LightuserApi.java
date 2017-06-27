@@ -138,7 +138,8 @@ public class LightuserApi extends BaseController{
     		if(user.getLight()!=null&&user.getLight().getId()!=null){
     	       light = lightservice.get(user.getLight().getId());
     		}
-    		all.put("status", user.getStatus());
+    		all.put("musicstatus", user.getMusicstatus());
+    		all.put("lightstatus", user.getLstatus());
     		all.put("lightCode", light==null?"":light.getInstructions());
     		all.put("musicurl",music==null?"":ResourceUploadUtil.getFileBasePath(request)+""+(new ResourceService().get(Long.valueOf(music.getVideourl())).getResPath()));
     	}catch(Exception e){

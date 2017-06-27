@@ -44,7 +44,7 @@
 								</div>
 							</div>
 							<div class='form-group'>
-								<label class='col-sm-3 control-label no-padding-right'> 灯的执行指令主键 </label>
+								<label class='col-sm-3 control-label no-padding-right'> 灯光模式</label>
 								<div class='col-sm-9'>
 									<select th:field='${instance.light.id}'>
                                         <option value="0">请选择灯光</option>
@@ -56,7 +56,7 @@
 								</div>
 							</div>
 							<div class='form-group'>
-								<label class='col-sm-3 control-label no-padding-right'> 音乐执行指令主键 </label>
+								<label class='col-sm-3 control-label no-padding-right'> 音乐模式 </label>
 								<div class='col-sm-9'>
 									<select th:field='${instance.music.id}'>
                                         <option value="0">请选择音乐</option>
@@ -68,11 +68,22 @@
 								</div>
 							</div>
 						     <div class='form-group'>
-                                <label class='col-sm-3 control-label no-padding-right'> 状态</label>
+                                <label class='col-sm-3 control-label no-padding-right'> 音乐状态</label>
                                 <div class='col-sm-9'>
-                                    <select class="width-40 form-control" id="gender" th:field='${instance.status}' data-placeholder="请选择状态">
-                                        <option value="0">请选择</option>
+                                    <select class="width-40 form-control"  th:field='${instance.musicstatus}' id="musicstatus" data-placeholder="请选择音乐状态">
+                                        <option value="0">请选择音乐状态（停止）</option>
                                         <option value="1">暂停播放</option>
+                                        <option value="2">循环播放</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                             <div class='form-group'>
+                                <label class='col-sm-3 control-label no-padding-right'> 灯光状态</label>
+                                <div class='col-sm-9'>
+                                    <select class="width-40 form-control" th:field='${instance.lstatus}' id="lstatus" data-placeholder="请选择灯光状态">
+                                        <option value="0">请选择灯光状态（停止）</option>
+                                        <option value="1">循环</option>
                                     </select>
                                 </div>
                             </div>

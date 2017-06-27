@@ -24,7 +24,9 @@ public class Lightuser{
 
     private String name;
 
-    private Integer status;
+    private String musicstatus;
+    
+    private String lstatus;
 
     private String telephone;
 
@@ -90,15 +92,25 @@ public class Lightuser{
         this.name=name;
     }
 
-    public Integer getStatus() {
-        return this.status;
-    }
+    public String getMusicstatus() {
+		return musicstatus;
+	}
 
-    public void setStatus (Integer status) {
-        this.status=status;
-    }
+	public void setMusicstatus(String musicstatus) {
+		this.musicstatus = musicstatus;
+	}
 
-    public String getTelephone() {
+
+
+	public String getLstatus() {
+		return lstatus;
+	}
+
+	public void setLstatus(String lstatus) {
+		this.lstatus = lstatus;
+	}
+
+	public String getTelephone() {
         return this.telephone;
     }
 
