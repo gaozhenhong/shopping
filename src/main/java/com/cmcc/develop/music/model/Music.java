@@ -15,8 +15,28 @@ public class Music{
     private String title;
 
     private String describle;
+    
+    private Long playtimes;//播放次数
+    
+    private String imgurl;//图片地址
 
-    public String getId() {
+    public String getImgurl() {
+		return imgurl;
+	}
+
+	public void setImgurl(String imgurl) {
+		this.imgurl = imgurl;
+	}
+
+	public Long getPlaytimes() {
+		return playtimes;
+	}
+
+	public void setPlaytimes(Long playtimes) {
+		this.playtimes = playtimes;
+	}
+
+	public String getId() {
         return this.id;
     }
 

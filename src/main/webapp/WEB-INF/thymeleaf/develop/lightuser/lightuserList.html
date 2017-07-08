@@ -63,6 +63,7 @@
 									<th id='music' class="table-order-column">音乐模式</th>
                                     <th id='status' class="table-order-column">音乐状态</th>
                                     <th id='status' class="table-order-column">灯光状态</th>
+                                    <th id='status' class="table-order-column">声控状态</th>
 
 													<th></th>
 												</tr>
@@ -87,13 +88,21 @@
                                                         <span th:case="1" >暂停播放</span>
                                                         <span th:case="2" >循环播放</span>
                                                         <span th:case="*" class="label label-sm label-danger">未设置</span>
-                                         </div></td>
+                                                     </div>
+                                         </td>
                                            <td >
                                                     <div th:switch="${obj.lstatus}">
                                                         <span th:case="0" >停止</span>
                                                         <span th:case="1" >循环</span>
                                                         <span th:case="*" class="label label-sm label-danger">未设置</span>
-                                         </div></td>
+                                                   </div></td>
+                                          <td >
+                                                    <div th:switch="${obj.soundcontroler}">
+                                                        <span th:case="0" >停止</span>
+                                                        <span th:case="1" >打开</span>
+                                                        <span th:case="*" class="label label-sm label-danger">未设置</span>
+                                                     </div>
+                                         </td>
 													<td >
 														<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons row-action-buttons">
 															<a class="blue show-a" th:href="@{/develop/lightuser/view.do(id=${obj.id},isModal=false)}" data-rel="tooltip" title="查看">

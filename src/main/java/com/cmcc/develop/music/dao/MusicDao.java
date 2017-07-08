@@ -44,8 +44,13 @@ public class MusicDao extends DaoBase {
 
     @SuppressWarnings("unchecked")
     public List<Music> getList(PageUtil pageUtil) throws DaoException,RenderException {
-        sql = "select * FROM d_music";
+        sql = "select * FROM d_music order by playtimes desc";
         return DbAdapter.getList(sql,pageUtil, Music.class);
+    }
+    
+    public List<Music> getListOrderByPlayTimes() throws DaoException,RenderException {
+        sql = "select * FROM d_music order by playtimes desc";
+        return DbAdapter.getList(sql, Music.class);
     }
 
 }

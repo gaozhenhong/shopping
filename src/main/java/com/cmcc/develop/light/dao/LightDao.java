@@ -62,6 +62,8 @@ public class LightDao extends DaoBase {
         }else{
         	sql+="status='1' or (status='2' and usercode ='"+usercode+"' )";
         }
+        
+        sql+= " order by createDate desc";
         return DbAdapter.getList(sql, Light.class);
     }
 

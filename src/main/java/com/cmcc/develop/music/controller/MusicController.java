@@ -5,20 +5,21 @@ import javax.servlet.http.HttpServletRequest;
 import org.jsoup.helper.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.cmcc.develop.music.model.Music;
+import com.cmcc.develop.music.model.MusicQ;
+import com.cmcc.develop.music.service.MusicService;
 import com.wiwi.jsoil.base.BaseController;
 import com.wiwi.jsoil.sys.model.Resource;
 import com.wiwi.jsoil.sys.model.User;
 import com.wiwi.jsoil.sys.service.ResourceService;
+import com.wiwi.jsoil.util.RequestUtil;
 import com.wiwi.jsoil.util.ResourceUploadUtil;
-import com.cmcc.develop.music.model.Music;
-import com.cmcc.develop.music.model.MusicQ;
-import com.cmcc.develop.music.service.MusicService;
 
 @Controller
 @RequestMapping(value = "/develop/music/")
@@ -63,6 +64,10 @@ public class MusicController extends BaseController{
         {
           instance.setVideourl(resourceInstance.getId()+"");
         }
+        
+        Long thumbId = Long.valueOf(RequestUtil.getLongParameter(request, "thumbId"));
+        instance.setImgurl(thumbId+"");
+        
         service.insert(instance);
 
         setOperationMessage("添加成功！");
@@ -79,6 +84,10 @@ public class MusicController extends BaseController{
         if(!StringUtil.isBlank(instance.getVideourl())){
            model.addAttribute("musicFile", new ResourceService().get(Long.valueOf(instance.getVideourl())));
         }
+        if(instance.getImgurl()!=null&&!instance.getImgurl().equals("")){
+          Resource logo = new ResourceService().get(Long.valueOf(instance.getImgurl()));
+          model.addAttribute("resource", logo);
+        }
 
         return "thymeleaf/develop/music/musicEdit";
 
@@ -87,13 +96,16 @@ public class MusicController extends BaseController{
 
     @RequestMapping(value = "editAction.do")
     public String editAction(@ModelAttribute(value="instance") Music instance, HttpServletRequest request,Model model) throws Exception {
-    	User user = getUser();
-        Resource resourceInstance = ResourceUploadUtil.uploadFile(request, user, "music");
-        if (resourceInstance != null)
-        {
-          instance.setVideourl(resourceInstance.getId()+"");
-        }
-        service.update(instance);
+		User user = getUser();
+		Resource resourceInstance = ResourceUploadUtil.uploadFile(request, user, "music");
+		if (resourceInstance != null) {
+			instance.setVideourl(resourceInstance.getId() + "");
+		}
+
+        Long thumbId = Long.valueOf(RequestUtil.getLongParameter(request, "thumbId"));
+        instance.setImgurl(thumbId+"");
+        
+		service.update(instance);
 
         setOperationMessage("修改成功！");
 
@@ -110,7 +122,10 @@ public class MusicController extends BaseController{
             model.addAttribute("musicFile", new ResourceService().get(Long.valueOf(instance.getVideourl())));
          }
         model.addAttribute("isModal", isModal == null?true:isModal );
-        
+        if(instance.getImgurl()!=null&&!instance.getImgurl().equals("")){
+            Resource logo = new ResourceService().get(Long.valueOf(instance.getImgurl()));
+            model.addAttribute("resource", logo);
+          }
 
         return "thymeleaf/develop/music/musicView";
 

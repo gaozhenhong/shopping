@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import com.cmcc.develop.lightuser.model.Lightuser;
 import com.wiwi.jsoil.exception.DaoException;
+import com.wiwi.jsoil.exception.NoLightuserLoginException;
 import com.wiwi.jsoil.exception.NoLoginException;
 import com.wiwi.jsoil.exception.NoMemberLoginException;
 import com.wiwi.jsoil.exception.NoSiteCodeException;
@@ -54,6 +56,10 @@ public class BaseController
       setOperationMessage("会员登录失效，没访问权限，请重新登录！");
       return "redirect:/mobile/member/login";
     }
+    if (ex instanceof NoLightuserLoginException) {
+        setOperationMessage("会员登录失效，没访问权限，请重新登录！");
+        return "redirect:/mobile/light/member/login";
+      }
     return "thymeleaf//sys/errors/error";
   }
 
@@ -125,6 +131,35 @@ public class BaseController
     return member;
   }
 
+  
+  protected static Lightuser getLightuser() throws NoLightuserLoginException {
+	  Lightuser member = null;
+    try {
+      member = (Lightuser)getSession().getAttribute("MeMbErLoGiNsEsSiOnKeY");
+      if (member == null) {
+        String requestUrl = getRequest().getRequestURL().toString();
+        String queryStr = getRequest().getQueryString();
+        if (queryStr == null)
+          queryStr = "";
+        if (!(queryStr.equalsIgnoreCase("")))
+          requestUrl = requestUrl + "?" + queryStr;
+        getRequest().getSession().setAttribute("BeFoReLoGiNuRl", requestUrl);
+        getRequest().setAttribute("operationMessage", "没访问权限！");
+        throw new NoLightuserLoginException("没访问权限！");
+      }
+    } catch (Exception e) {
+      String requestUrl = getRequest().getRequestURL().toString();
+      String queryStr = getRequest().getQueryString();
+      if (queryStr == null)
+        queryStr = "";
+      if (!(queryStr.equalsIgnoreCase("")))
+        requestUrl = requestUrl + "?" + queryStr;
+      getRequest().getSession().setAttribute("BeFoReLoGiNuRl", requestUrl);
+      getRequest().setAttribute("operationMessage", "没访问权限！");
+      throw new NoLightuserLoginException("没访问权限！");
+     }
+    return member;
+  }
   protected static String getSiteCode() throws NoSiteCodeException {
     String siteCode = "";
     try {

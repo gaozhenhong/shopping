@@ -46,9 +46,14 @@ public class LightuserDao extends DaoBase {
         sql = "select * FROM d_lightuser WHERE usercode ='" + usercode +"'";
         return (Lightuser)DbAdapter.get(sql,Lightuser.class);
     }
+    
+    public Lightuser getByTelphone(String telephone) throws DaoException,RenderException {
+        sql = "select * FROM d_lightuser WHERE telephone ='" + telephone +"'";
+        return (Lightuser)DbAdapter.get(sql,Lightuser.class);
+    }
     @SuppressWarnings("unchecked")
     public List<Lightuser> getList(PageUtil pageUtil) throws DaoException,RenderException {
-    	 sql = " select c.*,u.title as lightTitle,t.title as musicTitle  FROM d_lightuser c,d_light u,d_music t where c.lightId = u.id and c.musicId = t.id";
+    	 sql = " select c.*,u.title as lightTitle,t.title as musicTitle  FROM d_lightuser c,d_light u,d_music t where c.lightId = u.id and c.musicId = t.id ";
         return DbAdapter.getList(sql,pageUtil, Lightuser.class);
     }
 

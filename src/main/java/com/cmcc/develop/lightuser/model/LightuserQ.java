@@ -36,8 +36,68 @@ public class LightuserQ extends PageUtil {
     private Light light;
 
     private Music music;
+    
+    private String mtitle;
+    
+    private String ltitle;
+    
+    private String cmusictitle;
+    
+    public String getMtitle() {
+		return mtitle;
+	}
 
-    public String toWhereString() {
+	public void setMtitle(String mtitle) {
+		this.mtitle = mtitle;
+	}
+
+	public String getLtitle() {
+		return ltitle;
+	}
+
+	public void setLtitle(String ltitle) {
+		this.ltitle = ltitle;
+	}
+
+	public String getCmusictitle() {
+		return cmusictitle;
+	}
+
+	public void setCmusictitle(String cmusictitle) {
+		this.cmusictitle = cmusictitle;
+	}
+
+	public String getLightbrightness() {
+		return lightbrightness;
+	}
+
+	public void setLightbrightness(String lightbrightness) {
+		this.lightbrightness = lightbrightness;
+	}
+
+	public Music getCurrentmusic() {
+		return currentmusic;
+	}
+
+	public void setCurrentmusic(Music currentmusic) {
+		this.currentmusic = currentmusic;
+	}
+
+	private String soundcontroler;
+    
+    private String lightbrightness;
+    
+    private Music currentmusic;
+
+    public String getSoundcontroler() {
+		return soundcontroler;
+	}
+
+	public void setSoundcontroler(String soundcontroler) {
+		this.soundcontroler = soundcontroler;
+	}
+
+	public String toWhereString() {
 
         parameterList.clear();
 
@@ -107,6 +167,38 @@ public class LightuserQ extends PageUtil {
         if (music != null && music.getId()!=null){
             sqlStr += " AND music like ?";
             parameterList.add('%' + music.getId() + '%'); 
+        }
+        
+        if (soundcontroler != null && !soundcontroler.equals("")){
+            sqlStr += " AND soundcontroler like ?";
+            parameterList.add('%' +soundcontroler + '%'); 
+        }
+        
+        if (lightbrightness != null && !lightbrightness.equals("")){
+            sqlStr += " AND lightbrightness like ?";
+            parameterList.add('%' +lightbrightness + '%'); 
+        }
+        
+        if (currentmusic != null && !currentmusic.getId().equals("")){
+            sqlStr += " AND currentmusicId like ?";
+            parameterList.add('%' +currentmusic.getId() + '%'); 
+        }
+        
+        if (cmusictitle != null && !cmusictitle.equals("")){
+            sqlStr += " AND cmusictitle like ?";
+            parameterList.add('%' +cmusictitle + '%'); 
+        }
+        
+        
+        if (ltitle != null && !ltitle.equals("")){
+            sqlStr += " AND ltitle like ?";
+            parameterList.add('%' +ltitle + '%'); 
+        }
+        
+        
+        if (mtitle != null && !mtitle.equals("")){
+            sqlStr += " AND mtitle like ?";
+            parameterList.add('%' +mtitle + '%'); 
         }
 
         return sqlStr;

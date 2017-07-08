@@ -16,8 +16,28 @@ public class MusicQ extends PageUtil {
     private String title;
 
     private String describle;
+    
+    private Long playtimes;//播放次数
+    
+    private String imgurl;//图片地址
 
-    public String toWhereString() {
+    public Long getPlaytimes() {
+		return playtimes;
+	}
+
+	public String getImgurl() {
+		return imgurl;
+	}
+
+	public void setImgurl(String imgurl) {
+		this.imgurl = imgurl;
+	}
+
+	public void setPlaytimes(Long playtimes) {
+		this.playtimes = playtimes;
+	}
+
+	public String toWhereString() {
 
         parameterList.clear();
 
@@ -46,6 +66,16 @@ public class MusicQ extends PageUtil {
         if (describle != null && !describle.equalsIgnoreCase("")){
             sqlStr += " AND describle like ?";
             parameterList.add('%' + describle + '%'); 
+        }
+        
+        if ((this.playtimes != null) && (this.playtimes.longValue() != 0L)) {
+            sqlStr = sqlStr + " AND playtimes =?";
+            this.parameterList.add(this.playtimes);
+          }
+        
+        if (imgurl != null && !imgurl.equalsIgnoreCase("")){
+            sqlStr += " AND imgurl like ?";
+            parameterList.add('%' + imgurl + '%'); 
         }
 
         return sqlStr;

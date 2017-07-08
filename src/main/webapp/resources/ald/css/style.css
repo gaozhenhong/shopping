@@ -1,0 +1,350 @@
+body {
+	background-color: #FDF5ED;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:visited {
+	text-decoration: none;
+	/*指已经访问过的链接*/
+}
+
+a:hover {
+	text-decoration: none;
+	/*指鼠标在链接*/
+}
+
+a:active {
+	text-decoration: none;
+	/* 指正在点的链接*/
+}
+ ul {
+    list-style: none;
+}
+.mb-0 {
+	margin-bottom: 0px!important;
+}
+
+.mt-0 {
+	margin-top: 0px!important;
+}
+
+.mt-10 {
+	margin-top: 10px;
+}
+
+.mb-5 {
+	margin-bottom: 5px;
+}
+
+.mb-10 {
+	margin-bottom: 10px;
+}
+
+.mb-20 {
+	margin-bottom: 20px;
+}
+
+.mb-30 {
+	margin-bottom: 30px;
+}
+
+.mb-40 {
+	margin-bottom: 40px;
+}
+
+.mt-20 {
+	margin-top: 20px;
+}
+
+.mt-30 {
+	margin-top: 30px;
+}
+
+.mt-40 {
+	margin-top: 40px;
+}
+
+.ml-5 {
+	margin-left: 5px;
+}
+
+.ml-10 {
+	margin-left: 10px;
+}
+
+.mr-5 {
+	margin-right: 5px;
+}
+
+.mr-10 {
+	margin-right: 10px;
+}
+
+.mr-20 {
+	margin-right: 20px;
+}
+
+.x1 {
+	font-size: 14px;
+}
+
+.x2 {
+	font-size: 18px;
+}
+
+.x3 {
+	font-size: 22px;
+}
+
+.x4 {
+	font-size: 26px;
+}
+
+.x5 {
+	font-size: 30px;
+}
+
+.x6 {
+	font-size: 34px;
+}
+
+.x7 {
+	font-size: 38px;
+}
+
+.bb-0 {
+	border-bottom: 0;
+}
+
+.pt-0 {
+	padding-top: 0!important;
+}
+
+.pt-10 {
+	padding-top: 10px;
+}
+
+.m_main-outlet {
+	margin: auto;
+	width: 100%;
+}
+/*首页*/
+#m_container {
+	width: 100%;
+}
+
+.toparea {
+	height: 14rem;
+	padding-top: 30px;
+	background-color: #FD9E44;
+	background-size: 100%;
+	text-align: center;
+	background: -webkit-linear-gradient(#FFE07B, #FD9E44);
+	/* Safari 5.1 - 6.0 */
+	background: -o-linear-gradient(#FFE07B, #FD9E44);
+	/* Opera 11.1 - 12.0 */
+	background: -moz-linear-gradient(#FFE07B, #FD9E44);
+	/* Firefox 3.6 - 15 */
+	background: linear-gradient(#FFE07B, #FD9E44);
+	/* 标准的语法 */
+}
+
+.center_status {
+	margin-top: 1.8rem;
+	width: 120px;
+	height: 120px;
+	background-color: #fff;
+	border-radius: 100%;
+	border: 3px solid #FD9E44;
+	text-align: center;
+}
+
+.setting {
+	position: absolute;
+	top: 2px;
+	right: 8px;
+	color: #ffffff;
+}
+
+.weui-switch:checked {
+	border-color: #FD9E44;
+	background-color: #FD9E44;
+}
+
+.drawer-close .drawer-hamburger-icon {
+	background-color: #fff;
+}
+
+.drawer-hamburger-icon:after {
+	background-color: #fff;
+}
+
+.drawer-hamburger-icon:before {
+	background-color: #fff;
+}
+
+.p_head img {
+	border: 3px solid #fff;
+	width: 3.2rem;
+	height: 3.2rem;
+	border-radius: 50%;
+	margin: 1.6rem 0 0 8%;
+	display: inline-block;
+}
+
+.drawer_text {
+	padding-top: 1rem;
+	padding-left: 1.5rem;
+	text-decoration: none;
+	color: #666666;
+}
+/*首页结束*/
+
+header {
+    position: fixed;
+    width: 100%;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 50px;
+    background-color: transparent;
+   
+    z-index: 999;
+}
+header .left {float:left;width:20%; margin-top: 2px;}
+header .left a {color: #fff; position: relative; }
+header .center {width: 60%; margin-left: 20%; text-align:center; margin-top: 14px;}
+header .center a {color: #fff; position: relative;}
+header .right {position:absolute;top:0;right:5px;color:#fff;z-index:9999;}
+/*歌曲分类tab*/
+.publish-nav-group {
+	margin-top:50px;
+    background-color: #fff;
+    line-height: 48px;
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 0.8rem;
+}
+.publish-nav-group .publish-nav-item {
+    float: left;
+    width: 33.333%;
+	background-color:#ffffff;
+    color: #666;
+    border-bottom: 4px solid #fff;
+}
+.publish-nav-group .publish-nav-item.active {
+    border-bottom: 4px solid #FD9E44;
+}
+/*歌曲列表展示*/
+.topic-list{position:relative;padding:2px 10px;border-bottom:1px solid #ededed;font-family:Arial,Helvetica,sans-serif;}
+
+.gz_list{
+	display:inline-block;
+	width: 100%;
+}
+.list_pic{
+  position: relative;
+  display: inline-block;
+  text-align: center;
+  width: 4rem;
+  vertical-align:top;
+}
+.list_pic .userlogo{
+	width:60px;
+	height:60px;
+	display: block;	
+    margin: 15px auto;	
+}
+.gz_list .item_list{
+	display:inline-block;
+	padding:25px 10px 15px 10px;
+	vertical-align:top;
+	line-height:20px;
+}
+.item_list .head-title{
+	font-size:1rem;
+	font-weight:600;
+	color:#666;
+}
+.item_list .playcount{
+	font-size:0.8rem;
+	color:#999999;
+	padding-top:3px;
+}
+
+.btn_item {
+	float:right;
+	display: block;
+	color:#666;
+	padding-top:28px;
+}
+.now_song {
+	padding-left:10px;
+    line-height: 48px;
+	display: inline-block;
+    height: 48px;
+    width: 100%;
+	color:#ffffff;
+    background: #000000;
+    opacity: 0.3;
+    position: fixed;
+    left: 0;
+    bottom: 0px;
+    right: 0px;
+    border-top: 1px solid #D9D9D9;
+}
+.nowstatus{
+	display: inline-block;
+}
+.dostatus{
+	display: inline-block;
+	float:right;
+	padding-right:20px;
+}
+/*.. 注册登录  ..*/
+.login_box .weui-cells {
+	width: 90%;
+    margin: 0 auto;
+    font-size: 0.7rem;
+    border-radius: 6px;
+    padding: 0.2rem 0;
+    border: 1px solid #eee;
+}
+.login_box .weui-cells:before,.login_box .weui-cells:after {
+	border:0;
+}
+.login_box .buttons {
+	width:90%;
+	margin:0 auto;
+	margin-top:2rem;
+}
+.login_box .iconfont {
+	font-size: 3rem;
+    width: 100%;
+    text-align: center;
+    color: #1aad19;
+    display: inline-block;
+    margin: 2rem 0 1rem 0;
+}
+.login_box .tips {
+	padding:0 4%;
+	margin-top:2rem;
+}
+.login_box .tips span {
+	font-size:0.6rem;
+	color:#999;
+}
+.login_box .tips span:nth-child(1) {
+	display: block;
+	color:#555;
+}
+.login_box .weui-footer {
+	position:absolute;
+	bottom:0.8rem;
+	width:100%;
+}
+
+

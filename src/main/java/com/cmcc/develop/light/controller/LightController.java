@@ -54,6 +54,7 @@ public class LightController extends BaseController{
     @RequestMapping(value = "addAction.do")
     public String addAction(@ModelAttribute(value="instance") Light instance,Model model) throws Exception {
     	instance.setStatus("1");//公共
+    	instance.setCreateDate(new Date());
         service.insert(instance);
 
         setOperationMessage("添加成功！");
@@ -75,7 +76,7 @@ public class LightController extends BaseController{
 
     @RequestMapping(value = "editAction.do")
     public String editAction(@ModelAttribute(value="instance") Light instance,Model model) throws Exception {
-    	
+    	instance.setCreateDate(new Date());
         service.update(instance);
 
         setOperationMessage("修改成功！");

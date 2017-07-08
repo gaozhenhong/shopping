@@ -35,8 +35,68 @@ public class Lightuser{
     private Light light;
 
     private Music music;
+    
+    private String soundcontroler;
+    
+    private String lightbrightness;
+    
+    private Music currentmusic;
+    
+    private String mtitle;
+    
+    private String ltitle;
+    
+    private String cmusictitle;
 
-    public String getId() {
+    public String getMtitle() {
+		return mtitle;
+	}
+
+	public void setMtitle(String mtitle) {
+		this.mtitle = mtitle;
+	}
+
+	public String getLtitle() {
+		return ltitle;
+	}
+
+	public void setLtitle(String ltitle) {
+		this.ltitle = ltitle;
+	}
+
+	public String getCmusictitle() {
+		return cmusictitle;
+	}
+
+	public void setCmusictitle(String cmusictitle) {
+		this.cmusictitle = cmusictitle;
+	}
+
+	public String getLightbrightness() {
+		return lightbrightness;
+	}
+
+	public void setLightbrightness(String lightbrightness) {
+		this.lightbrightness = lightbrightness;
+	}
+
+	public Music getCurrentmusic() {
+		return currentmusic;
+	}
+
+	public void setCurrentmusic(Music currentmusic) {
+		this.currentmusic = currentmusic;
+	}
+
+	public String getSoundcontroler() {
+		return soundcontroler;
+	}
+
+	public void setSoundcontroler(String soundcontroler) {
+		this.soundcontroler = soundcontroler;
+	}
+
+	public String getId() {
         return this.id;
     }
 

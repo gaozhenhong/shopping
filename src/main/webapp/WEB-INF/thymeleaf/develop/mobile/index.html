@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+		<meta name="keywords" content="">
+		<meta name="description" content="">
+		<title>我的小丁</title>
+		<link href="resources/ald/css/weui.min.css" th:href="@{/resources/ald/css/weui.min.css}" rel="stylesheet">
+		<link href="resources/ald/css/drawer.min.css" th:href="@{/resources/ald/css/drawer.min.css}" rel="stylesheet">
+		<link href="resources/ald/font/iconfont.css" th:href="@{/resources/ald/font/iconfont.css}"  rel="stylesheet">
+		<link href="resources/ald/css/style.css?v=14645" th:href="@{/resources/ald/css/style.css?v=14645}" rel="stylesheet">
+		<script src="/resources/ald/js/jquery.min.js" th:src="@{/resources/ald/js/jquery.min.js}"></script>
+		<script src="/resources/ald/js/bootstrap.min.js" th:src="@{/resources/ald/js/bootstrap.min.js}"></script>
+		<script src="/resources/ald/js/iscroll.js" th:src="@{/resources/ald/js/iscroll.js}"></script>
+
+	</head>
+	<body class="drawer drawer--left drawer-close">
+		<header role="banner">
+	    <button type="button" class="drawer-toggle drawer-hamburger" style="width: 1.8rem;">
+        <span class="sr-only"></span>
+        <span class="drawer-hamburger-icon"></span>
+        </button>
+        <!--抽屉栏目内容-->
+			<nav class="drawer-nav" role="navigation">
+				<ul class="drawer-menu">
+					<li style="background-color: #fff;" class='p_head'>
+						<a class="drawer-brand" style="height:50px;"><img  th:src="@{/resources/ald/img/123.jpg}" /></a>
+					</li>
+					<li style="background-color: #FDBC45;">
+						<a class="drawer-menu-item" style="height:30px;padding-left:6rem ;color:#fff;text-decoration:none;">昆sir</a>
+					</li>
+					<li>
+						<a class="drawer-menu-item drawer_text" style="text-decoration: none;" href="">我的小丁</a>
+					</li>
+					<li>
+						<a class="drawer-menu-item drawer_text" style="text-decoration: none;" href="">WIFI连接<br><small style="color:#ccc;">已连接</small></a>
+					</li>
+					<li>
+						<a class="drawer-menu-item drawer_text" style="text-decoration: none;" href="">我的音乐</a>
+					</li>
+					<li>
+						<a class="drawer-menu-item drawer_text" style="text-decoration: none;" href="">关于小丁</a>
+					</li>
+					<li>
+						<a class="drawer-menu-item drawer_text" style="text-decoration: none;" href="">联系我们</a>
+					</li>
+				</ul>
+			</nav>
+		</header>
+		<div id="m_container">
+			<div class="m_main-outlet">
+				<div class="toparea">
+
+					<div class="setting"><i class="icon iconfont icon-shezhi" style="font-size: 36px;"></i></div>
+					<div id="circle" class="center_status"  th:switch="${user.lstatus}">
+						<div style="font-size:0.6rem; color:#ccc;padding-top:1.5rem;">当前状态</div>
+						<div style="color:#FD9E44;padding-top:0.5rem;font-size:1.2rem;" th:case="0">已关灯</div>
+						<div style="color:#FD9E44;padding-top:0.5rem;font-size:1.2rem;" th:case="1">已开灯</div>
+					</div>
+					<div style="font-size:0.6rem;color:#fff;margin-top: 10px;">小丁已为您服务23天</div>
+				</div>
+				<div class="weui-cells weui-cells_form" style="margin-top:0;">
+					<a class="weui-cell weui-cell_switch" style="height:50px;">
+						<div class="weui-cell__bd" style="color:#999;font-size: 0.9rem;">声控开关</div>
+						<div class="weui-cell__ft" >
+							<input class="weui-switch" id="noname" type="checkbox" th:if="${user.soundcontroler eq '1'}" th:checked="true"></input>
+							<input class="weui-switch" id="noname" type="checkbox" th:if="${user.soundcontroler eq '0'}"></input>
+						</div>
+					</a>
+					<a class="weui-cell weui-cell_access" href="./light.html" style="padding:20px 15px;">
+						<div class="weui-cell__bd">
+							<p style="color:#999;font-size: 0.9rem;">灯光模式</p>
+						</div>
+						<div style="float:right;font-size:12px;color:#FD9E44;" th:text="${user.ltitle}">温馨黄光</div>
+						<div class="weui-cell__ft"></div>
+					</a>
+					<a class="weui-cell weui-cell_access" href="./song.html" style="padding:20px 15px;">
+						<div class="weui-cell__bd">
+							<p style="color:#999;font-size: 0.9rem;">选择歌曲</p>
+						</div>
+						<div style="float:right;font-size:12px;color:#FD9E44;" th:text="${user.mtitle}">两只老虎</div>
+						<div class="weui-cell__ft"></div>
+					</a>
+				</div>
+				<!--底部标签-->
+				<div class="weui-footer weui-footer_fixed-bottom">
+					<p class="weui-footer__text"> © 阿拉丁神灯</p>
+				</div>
+			</div>
+		</div>
+<script type="text/javascript" th:src="@{/resources/ald/js/drawer.min.js}"></script>
+<script type="text/javascript" th:inline="javascript">
+   $(document).ready(function() {
+       
+         var width = document.body.clientWidth;
+         var halfwidth = width / 2;
+         var leftpositon = halfwidth - (60 + 3);
+         $('#circle').css("margin-left", leftpositon + 'px');
+         $('.drawer').drawer();
+
+            
+         $('#noname').on('click', function () {
+            var hasChk = $('#noname').is(':checked'); 
+            if(hasChk){ 
+            var href= [[@{/api/develop/home/setSoundControler.do}]];
+            href = href + "?telephone="+[[${user.telephone}]]+"&type=1";
+            $.ajax({ 
+                url: href, 
+                context: document.body, 
+                type : "POST", 
+                dataType:"text",
+                contentType:'application/json;charset=UTF-8',
+                data : {
+                        "telephone" : [[${user.telephone}]],
+                        "type":"1",
+                        "lightId":""
+                },
+                success: function(resultData){
+                    //alert(resultData);
+
+                },
+                error:function(xhr,status,error){
+                        alert("操作失败！异常：error=" + error);
+                }
+            });
+               /*已选中*/ 
+            }else{ 
+             /*未选中*/ 
+            var href= [[@{/api/develop/home/setSoundControler.do}]];
+            href = href + "?telephone="+[[${user.telephone}]]+"&type=0";
+            //alert("href===" + href);
+            $.ajax({ 
+                url: href, 
+                context: document.body, 
+                type : "POST", 
+                dataType:"text",
+                contentType:'application/json;charset=UTF-8',
+                data : {
+                        "telephone" : [[${user.telephone}]],
+                        "type":"0",
+                        "lightId":""
+                },
+                success: function(resultData){
+                    //alert(resultData);
+
+                },
+                error:function(xhr,status,error){
+                        alert("操作失败！异常：error=" + error);
+                }
+            });
+            }
+         });  
+           
+   });
+        </script>
+	</body>
+
+</html>

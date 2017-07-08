@@ -83,8 +83,17 @@
                                 <label class='col-sm-3 control-label no-padding-right'> 灯光状态</label>
                                 <div class='col-sm-9'>
                                     <select class="width-40 form-control" th:field='${instance.lstatus}' id="lstatus" data-placeholder="请选择灯光状态">
-                                        <option value="0">请选择灯光状态（停止）</option>
-                                        <option value="1">循环</option>
+                                        <option value="0">关灯</option>
+                                        <option value="1">开灯</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class='form-group'>
+                                <label class='col-sm-3 control-label no-padding-right'> 声控状态</label>
+                                <div class='col-sm-9'>
+                                    <select class="width-40 form-control" th:field='${instance.soundcontroler}' id="lstatus" data-placeholder="请选择声控状态">
+                                        <option value="0">关闭</option>
+                                        <option value="1">打开</option>
                                     </select>
                                 </div>
                             </div>

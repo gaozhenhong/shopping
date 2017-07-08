@@ -39,6 +39,11 @@ public class LightuserService {
         LightuserDao dao = new LightuserDao();
     	return dao.getByUsercode(usercode);
     }
+    
+    public Lightuser getByTelphone(String telephone) throws DaoException,RenderException {
+        LightuserDao dao = new LightuserDao();
+    	return dao.getByTelphone(telephone);
+    }
 
     public List<Lightuser> getList(PageUtil pageUtil) throws DaoException,RenderException {
         LightuserDao dao = new LightuserDao();

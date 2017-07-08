@@ -32,6 +32,24 @@
 		    <artifactId>jackson-mapper-asl</artifactId>  
 		    <version>1.8.4</version>  
 	   </dependency>
+	   	<!-- json -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<!--
+            风险：高风险
+            方式：黑客通过利用漏洞可以实现远程代码执行
+            影响：1.2.24及之前版本
+            安全版本：>=1.2.28
+            -->
+			<version>1.2.28</version>
+		</dependency>
+		<!-- OkHttp -->
+		<dependency>
+			<groupId>com.squareup.okhttp3</groupId>
+			<artifactId>okhttp</artifactId>
+			<version>3.4.1</version>
+		</dependency>
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>

@@ -42,7 +42,6 @@ public class MusicService {
     
     public List<Music> getList() throws DaoException,RenderException {
     	MusicDao dao = new MusicDao();
-    	MusicQ query = new MusicQ();
-    	return dao.getList(query);
+    	return dao.getListOrderByPlayTimes();
     }
 }

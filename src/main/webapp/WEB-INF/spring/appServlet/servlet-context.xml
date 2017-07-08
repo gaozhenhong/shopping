@@ -18,6 +18,11 @@
 
 	<!-- 加入权限过滤权限拦截器  -->
 	<interceptors>
+		<interceptor>
+	        <!-- 定义阿拉丁网站访问限制的interceptor测-->  
+			<mapping path="/mobile/light/sys/home.do"/>
+	        <beans:bean class="com.cmcc.develop.interceptor.MemberInterceptor"/>  
+		</interceptor>
 		<beans:bean class="com.wiwi.jsoil.base.JsoilInterceptor"></beans:bean>
 	</interceptors>
 	

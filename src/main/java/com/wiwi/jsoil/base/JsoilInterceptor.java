@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.cmcc.develop.lightuser.model.Lightuser;
 import com.wiwi.jsoil.exception.NoLoginException;
 import com.wiwi.jsoil.sys.UserUtil;
 import com.wiwi.jsoil.sys.model.LoginLog;
@@ -39,6 +40,10 @@ public class JsoilInterceptor
     guestPermissionFileList.add(".xml");
     guestPermissionFileList.add("loginAction.do");
     guestPermissionFileList.add("logoutAction.do");
+    guestPermissionFileList.add("sendverifycode.do");
+    guestPermissionFileList.add("registerAction.do");
+    guestPermissionFileList.add("bdcheck.do");
+    
 
     logger = LoggerFactory.getLogger(JsoilInterceptor.class);
   }
@@ -61,6 +66,12 @@ public class JsoilInterceptor
   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object arg2)
     throws Exception
   {
+	  //先判断客户端有没有验证
+	 Lightuser member = (Lightuser)request.getSession().getAttribute("MeMbErLoGiNsEsSiOnKeY");
+	 if (member != null) {
+	      return true;
+	 }
+	 
     String requestURI = request.getRequestURI();
     String queryStr = request.getQueryString();
     if (queryStr == null)

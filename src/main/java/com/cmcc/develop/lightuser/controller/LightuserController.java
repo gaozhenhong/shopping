@@ -64,6 +64,14 @@ public class LightuserController extends BaseController{
     @RequestMapping(value = "addAction.do")
     public String addAction(@ModelAttribute(value="instance") Lightuser instance,Model model) throws Exception {
 
+        LightService lservice = new LightService();
+        Light light = lservice.get(instance.getLight().getId());
+        
+    	MusicService musicService = new MusicService();
+		Music music = musicService.get(instance.getMusic().getId());
+    	
+    	instance.setMtitle(music==null?"":music.getTitle());
+		instance.setLtitle(light==null?"":light.getTitle());
         service.insert(instance);
 
         setOperationMessage("添加成功！");
@@ -87,7 +95,7 @@ public class LightuserController extends BaseController{
     @RequestMapping(value = "editAction.do")
     public String editAction(@ModelAttribute(value="instance") Lightuser instance,Model model) throws Exception {
 
-        service.update(instance);
+      
         LightService lservice = new LightService();
         Light light = lservice.get(instance.getLight().getId());
 		Lighthistory lighthistory = new Lighthistory();
@@ -112,7 +120,10 @@ public class LightuserController extends BaseController{
 		musichistory.setUsercode(instance.getUsercode());
 		MusichistoryService ms = new MusichistoryService();
 		ms.insert(musichistory);
-		
+		System.out.println("title"+music.getTitle());
+		instance.setMtitle(music==null?"":music.getTitle());
+		instance.setLtitle(light==null?"":light.getTitle());
+	    service.update(instance);
         setOperationMessage("修改成功！");
 
         return "redirect:list.do";
