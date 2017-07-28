@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,9 +8,12 @@
 		<meta name="keywords" content="">
 		<meta name="description" content="">
 		<title>歌曲模式-阿拉丁神灯</title>
-		<link href="css/weui.css" rel="stylesheet">
-		<link href="font/iconfont.css" rel="stylesheet">
-		<link href="css/style.css?v=14645" rel="stylesheet">
+		
+		<link href="resources/ald/css/weui.css" th:href="@{/resources/ald/css/weui.css}"  rel="stylesheet">
+        <link href="resources/ald/font/iconfont.css" th:href="@{/resources/ald/font/iconfont.css}"  rel="stylesheet">
+        <link href="resources/ald/css/style.css?v=14645" th:href="@{/resources/ald/css/style.css?v=14645}" rel="stylesheet">
+        <script src="/resources/ald/js/jquery.min.js" th:src="@{/resources/ald/js/jquery.min.js}"></script>
+        <script src="/resources/ald/js/bootstrap.min.js" th:src="@{/resources/ald/js/bootstrap.min.js}"></script>
 	</head>
 	<style>
 		
@@ -48,22 +51,22 @@
     <div class="clearfix"></div>
   </div>
   
-  <ul>
+  <ul th:each="obj,objSta:${musics}">
   	<!--循环展示-->
   	<li class="topic-list">  
   		<div class=" gz_list">
   	      <div class="list_pic">
              <a href="" >
-             <img class="userlogo" src="img/1.jpg" alt="">                                     
+             <img class="userlogo" src="img/1.jpg"  th:src="${obj.imgurl}" alt="">                                     
              </a>
           </div>
           <div class="item_list">  
             <a href="">
-            <div class="head-title">
+            <div class="head-title" th:text="${obj.title}">
             小燕子
             </div>
             <div class="playcount">
-            <i class="icon iconfont icon-iconfont"></i>  播放 23156次 
+            <i class="icon iconfont icon-iconfont"></i>  <span th:text=@{'播放'+${obj.playtimes}+'次'}>播放 23156次 </span>
             </div> 
            </a>            
           </div> 
@@ -71,100 +74,22 @@
           	<a href="" style="color:#666;">
           		<i class="icon iconfont icon-shoucang x4"></i>
           	</a>
-          	<a href="" style="color:#666;margin-left: 15px;">
-          		<i class="icon iconfont icon-bofang1 x4"></i>
+          	<a href="javascript:void(0)"    style="color:#666;margin-left: 15px;">
+          		<i class="icon iconfont icon-bofang1 x4" th:id="${obj.id}" th:name="${obj.title}" onclick="bofang(this)"></i>
           	</a>
           </div>
   		</div>
   	</li>
-  	<li class="topic-list">  
-  		<div class=" gz_list">
-  	      <div class="list_pic">
-             <a href="" >
-             <img class="userlogo" src="img/2.jpg" alt="">                                     
-             </a>
-          </div>
-          <div class="item_list">  
-            <a href="">
-            <div class="head-title">
-             两只小白兔
-            </div>
-            <div class="playcount">
-            <i class="icon iconfont icon-iconfont"></i>  播放 21986次 
-            </div> 
-           </a>            
-          </div> 
-          <div class="btn_item">
-          	<a href="" style="color:#ec5d61;">
-          		<i class="icon iconfont icon-yishoucang x4"></i>
-          	</a>
-          	<a href="" style="color:#666;margin-left: 15px;">
-          		<i class="icon iconfont icon-bofang1 x4"></i>
-          	</a>
-          </div>
-  		</div>
-  	</li>
-  	<li class="topic-list">  
-  		<div class=" gz_list">
-  	      <div class="list_pic">
-             <a href="" >
-             <img class="userlogo" src="img/3.jpg" alt="">                                     
-             </a>
-          </div>
-          <div class="item_list">  
-            <a href="">
-            <div class="head-title">
-             我有一只小毛驴
-            </div>
-            <div class="playcount">
-            <i class="icon iconfont icon-iconfont"></i>  播放 17986次 
-            </div> 
-           </a>            
-          </div> 
-          <div class="btn_item">
-          	<a href="" style="color:#666;">
-          		<i class="icon iconfont icon-shoucang x4"></i>
-          	</a>
-          	<a href="" style="color:#666;margin-left: 15px;">
-          		<i class="icon iconfont icon-zanting x4"></i>
-          	</a>
-          </div>
-  		</div>
-  	</li>
-  	<li class="topic-list">  
-  		<div class=" gz_list">
-  	      <div class="list_pic">
-             <a href="" >
-             <img class="userlogo" src="img/4.jpg" alt="">                                     
-             </a>
-          </div>
-          <div class="item_list">  
-            <a href="">
-            <div class="head-title">
-             小螺号
-            </div>
-            <div class="playcount">
-            <i class="icon iconfont icon-iconfont"></i>  播放 12116次 
-            </div> 
-           </a>            
-          </div> 
-          <div class="btn_item">
-          	<a href="" style="color:#666;">
-          		<i class="icon iconfont icon-shoucang x4"></i>
-          	</a>
-          	<a href="" style="color:#666;margin-left: 15px;">
-          		<i class="icon iconfont icon-bofang1 x4"></i>
-          	</a>
-          </div>
-  		</div>
-  	</li>
+  	
   </ul>
   <div class="now_song">	  
   	<div class="nowstatus">
-       <i class="icon iconfont icon-shunxuxunhuan x3"></i><span style="padding-left: 10px; font-size: 0.8rem;">正在播放: 我有一只小毛驴</span>         		 	   
+  	    <input type="hidden" id="currentmusicid" th:value="(${user.music}==null)? '' : ${user.music.id}"/>
+  	     <input type="hidden" id="currentuserid" th:value="${user.id}"/>
+       <i class="icon iconfont icon-shunxuxunhuan x3"></i><span style="padding-left: 10px; font-size: 0.8rem;" id="currentbofang" th:text="'正在播放: '+${user.mtitle}">正在播放: 我有一只小毛驴</span>         		 	   
   	</div> 
   	<div class="dostatus">
-  	   <a href="" style="color:#fff;"><i class="icon iconfont icon-zanting x3"></i></a>
+  	   <a href="javascript:void(0)" style="color:#fff;"><i id="controler" th:class="(${user.musicstatus}=='0')?'icon iconfont x3 icon-bofang1':'icon iconfont x3 icon-zanting'" onclick="changeStatus(this)"></i></a>
   	</div>
   </div>
 <!--播放模式的底部弹出菜单-->
@@ -184,26 +109,86 @@
             </div>
         </div>
        </div>
-       <script src="js/zepto.min.js"></script>
-	   <script src="js/weui.min.js"></script>
-       <script>
+        <script src="/resources/ald/js/zepto.min.js"  th:src="@{/resources/ald/js/zepto.min.js}"></script>
+        <script src="js/weui.min.js" th:src="@{/resources/ald/js/weui.min.js}"></script>
+        <script type="text/javascript" th:inline="javascript">
       $(function(){
+    	 setInterval("getCurrentMusic()",2000);
         var $songActionsheet = $('#songActionsheet');
         var $songMask = $('#songMask');
-
+    
         function hideActionSheet() {
             $songActionsheet.removeClass('weui-actionsheet_toggle');
             $songMask.fadeOut(200);
+            
         }
         //点击选项
         //设置顺序播放模式
-        $('#orderstyle').on('click', hideActionSheet);
+        $('#orderstyle').on('click', function(e){
+        	//设置播放模式
+  		     var href= [[@{/api/develop/home/setMusicStatus.do}]];
+  		     href = href + "?telephone="+[[${user.telephone}]]+"&status=1";
+  		        //alert("href===" + href);
+  		     $.ajax({ 
+  		            url: href, 
+  		            context: document.body, 
+  		            type : "POST", 
+  		            dataType:"text",
+  		            contentType:'application/json;charset=UTF-8',
+  		            success: function(resultData){
+
+  		            },
+  		            error:function(xhr,status,error){
+  		                    //alert("操作失败！异常：error=" + error);
+  		            }
+  		        });
+  		   hideActionSheet();
+        });
         
-        //设置顺序播放模式
-        $('#randomstyle').on('click', hideActionSheet);
+        //设置 随机播放模式
+        $('#randomstyle').on('click',function(e){
+           	//设置播放模式
+ 		     var href= [[@{/api/develop/home/setMusicStatus.do}]];
+ 		     href = href + "?telephone="+[[${user.telephone}]]+"&status=2";
+ 		        //alert("href===" + href);
+ 		     $.ajax({ 
+ 		            url: href, 
+ 		            context: document.body, 
+ 		            type : "POST", 
+ 		            dataType:"text",
+ 		            contentType:'application/json;charset=UTF-8',
+ 		            success: function(resultData){
+
+ 		            },
+ 		            error:function(xhr,status,error){
+ 		                    //alert("操作失败！异常：error=" + error);
+ 		            }
+ 		        });
+ 		    hideActionSheet();
+        });
         
         //设置单曲播放模式
-        $('#singlestyle').on('click', hideActionSheet);
+        $('#singlestyle').on('click', function(e){
+           	//设置播放模式
+		     var href= [[@{/api/develop/home/setMusicStatus.do}]];
+		     href = href + "?telephone="+[[${user.telephone}]]+"&status=3";
+		        //alert("href===" + href);
+		     $.ajax({ 
+		            url: href, 
+		            context: document.body, 
+		            type : "POST", 
+		            dataType:"text",
+		            contentType:'application/json;charset=UTF-8',
+		            success: function(resultData){
+
+		            },
+		            error:function(xhr,status,error){
+		                    //alert("操作失败！异常：error=" + error);
+		            }
+		        });
+		     hideActionSheet();
+        }    
+        );
 
         $songMask.on('click', hideActionSheet);
         $('#songActionsheetCancel').on('click', hideActionSheet);
@@ -219,6 +204,122 @@
             $(this).addClass('weui-bar__item_on').siblings('.weui-bar__item_on').removeClass('weui-bar__item_on');
         });
     });
+    
+       //点击比方按钮
+    function bofang(obj){
+        var id = obj.id;
+        var name = $(obj).attr("name");
+      
+        
+		 /*未选中*/ 
+        var href= [[@{/api/develop/home/setMusic.do}]];
+        href = href + "?telephone="+[[${user.telephone}]]+"&status=0&musicId="+id;
+        //alert("href===" + href);
+        $.ajax({ 
+            url: href, 
+            context: document.body, 
+            type : "POST", 
+            dataType:"text",
+            contentType:'application/json;charset=UTF-8',
+            data : {
+                    "telephone" : [[${user.telephone}]],
+                    "type":"1",
+                    "lightId":$("#"+id+"hidden").val()
+            },
+            success: function(resultData){
+                //alert(resultData);
+            	  $("#currentbofang").html('正在播放: '+name);
+                  $("#currentmusicid").val(id);
+                  $("#controler").removeClass("icon-zanting");
+                  $("#controler").addClass("icon-bofang1");
+
+            },
+            error:function(xhr,status,error){
+                    //alert("操作失败！异常：error=" + error);
+            }
+        });
+    }
+       
+     function changeStatus(obj){
+    	 var id = $("#currentmusicid").val();
+    	 if($(obj).hasClass("icon-zanting")) {
+				$(obj).removeClass("icon-zanting");
+				$(obj).addClass("icon-bofang1");
+			
+				 /*未选中*/ 
+		        var href= [[@{/api/develop/home/setMusic.do}]];
+		        href = href + "?telephone="+[[${user.telephone}]]+"&status=0&musicId="+id;
+		        //alert("href===" + href);
+		        $.ajax({ 
+		            url: href, 
+		            context: document.body, 
+		            type : "POST", 
+		            dataType:"text",
+		            contentType:'application/json;charset=UTF-8',
+		            data : {
+		                    "telephone" : [[${user.telephone}]],
+		                    "type":"1",
+		                    "lightId":$("#"+id+"hidden").val()
+		            },
+		            success: function(resultData){
+
+		            },
+		            error:function(xhr,status,error){
+		                    //alert("操作失败！异常：error=" + error);
+		            }
+		        });
+		}else{
+			$(obj).removeClass("icon-bofang1");
+			$(obj).addClass("icon-zanting");
+			 /*未选中*/ 
+	        var href= [[@{/api/develop/home/setMusic.do}]];
+	        href = href + "?telephone="+[[${user.telephone}]]+"&status=1&musicId="+id;
+	        //alert("href===" + href);
+	        $.ajax({ 
+	            url: href, 
+	            context: document.body, 
+	            type : "POST", 
+	            dataType:"text",
+	            contentType:'application/json;charset=UTF-8',
+	            data : {
+	                    "telephone" : [[${user.telephone}]],
+	                    "type":"1",
+	                    "lightId":$("#"+id+"hidden").val()
+	            },
+	            success: function(resultData){
+                   $("#currentmusicid").val();
+	            },
+	            error:function(xhr,status,error){
+	                    //alert("操作失败！异常：error=" + error);
+	            }
+	        });
+			
+		}
+     }
+     
+     
+     function getCurrentMusic(){
+    	 /*未选中*/ 
+	        var href= [[@{/api/develop/home/getCurrentMusic.do}]];
+	        href = href;
+	        //alert("href===" + href);
+	        $.ajax({ 
+	            url: href, 
+	            context: document.body, 
+	            type : "POST", 
+	            dataType:"text",
+	            contentType:'application/json;charset=UTF-8',
+	            success: function(resultData){
+	            	  var result = JSON.parse(resultData);
+                      $("#currentmusicid").val(result.id);
+                      $("#currentbofang").html("正在播放:"+result.title);
+	            },
+	            error:function(xhr,status,error){
+	                    //alert("操作失败！异常：error=" + error);
+	            }
+	        });
+     }
+
        </script>
 	</body>
 </html>

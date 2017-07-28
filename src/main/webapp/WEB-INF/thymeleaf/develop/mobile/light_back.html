@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+		<meta name="keywords" content="">
+		<meta name="description" content="">
+		<title>灯光模式-阿拉丁神灯</title>
+		<link href="resources/ald/css/weui.css" th:href="@{/resources/ald/css/weui.css}"  rel="stylesheet">
+	    <link href="resources/ald/font/iconfont.css" th:href="@{/resources/ald/font/iconfont.css}"  rel="stylesheet">
+        <link href="resources/ald/css/style.css?v=14645" th:href="@{/resources/ald/css/style.css?v=14645}" rel="stylesheet">
+		<script src="/resources/ald/js/jquery.min.js" th:src="@{/resources/ald/js/jquery.min.js}"></script>
+        <script src="/resources/ald/js/bootstrap.min.js" th:src="@{/resources/ald/js/bootstrap.min.js}"></script>
+	</head>
+	<style>
+		.third_useron {
+			width: 38%;
+			margin: 8% 4% 0 4%;
+			display: inline-block;
+			border: 0.5px solid #FD9E44;
+			background-color: #FD9E44;
+			height: 50px;
+			line-height: 50px;
+			vertical-align: middle;
+			font-family: "microsoft yahei";
+			font-size: 1em;
+			vertical-align: middle;
+			color: #ffffff;
+			border-radius: 5px;
+		}
+		
+		.third_useroff {
+			width: 38%;
+			margin: 8% 4% 0 4%;
+			display: inline-block;
+			border: 0.5px solid #FD9E44;
+			height: 50px;
+			line-height: 50px;
+			vertical-align: middle;
+			font-family: "microsoft yahei";
+			font-size: 1em;
+			vertical-align: middle;
+			color: #FD9E44;
+			border-radius: 5px;
+		}
+		
+		.weui-slider__track {
+			background-color: #FD9E44;
+		}
+		
+		.light_deg {
+			padding: 50px 3%;
+		}
+	</style>
+
+	<body>
+		<header>
+			<div class="left">
+				<a href="javascript:history.go(-1);">
+					<i class="icon iconfont icon-fanhui x5" style="margin-left: 5px;color:#666;">
+          	</i>
+				</a>
+			</div>
+			<div class="center">
+				<span style="font-size:16px;color:#666;">
+       		灯光选择
+          </span>
+			</div>
+		</header>
+		<div style="margin-top:50px; padding: 10px 0px 20px 0px;">
+		    <input id="lightsize" type="hidden" th:value="${#lists.size(lights)}"/>
+			<div style="text-align: center;" th:each="obj,objSta:${lights}">
+			    <input th:id="'light'+${objSta.count}+'hidden'" type="hidden" th:value="${obj.id}"/>
+			    <span class="third_useron" th:class="(${user.light.id}==${obj.id})? 'third_useron' : 'third_useroff'" onclick="changespan(this)" th:value="${obj.id}" th:id="'light'+${objSta.count}" th:text="${obj.title}"></span>
+			</div>
+		</div>
+
+		<div class="light_deg">
+			<div class="weui-slider-box">
+				<div><i class="icon iconfont icon-dengguang-jian x3" style="color:#FD9E44;"></i></div>
+				<div class="weui-slider">
+					<div id="sliderInner" class="weui-slider__inner">
+						<div id="sliderTrack" style="width: 39%;" class="weui-slider__track"></div>
+						<div id="sliderHandler" style="left: 39%;" class="weui-slider__handler"></div>
+					</div>
+				</div>
+				<div><i class="icon iconfont icon-juguangdeng x3" style="color:#FD9E44;"></i></div>
+			</div>
+		</div>
+
+		<script src="/resources/ald/js/zepto.min.js"  th:src="@{/resources/ald/js/zepto.min.js}"></script>
+		<script src="js/weui.min.js" th:src="@{/resources/ald/js/weui.min.js}"></script>
+		<script type="text/javascript" th:inline="javascript">
+			function changespan(obj) {
+				var id = obj.id;
+				//把所有的档次的样式改为off状态
+				for(var i = 1; i <= $("#lightsize").val(); i++) {
+					if($("#light" + i).hasClass("third_useron")) {
+						$("#light" + i).removeClass("third_useron");
+						$("#light" + i).addClass("third_useroff");
+					}
+				}
+				//把此时选择的档次改为on状态
+				$("#" + id).removeClass("third_useroff");
+				$("#" + id).addClass("third_useron");
+				
+				 /*未选中*/ 
+            var href= [[@{/api/develop/home/setLight.do}]];
+            href = href + "?telephone="+[[${user.telephone}]]+"&type=1&lightId="+$("#"+id+"hidden").val();
+            //alert("href===" + href);
+            $.ajax({ 
+                url: href, 
+                context: document.body, 
+                type : "POST", 
+                dataType:"text",
+                contentType:'application/json;charset=UTF-8',
+                data : {
+                        "telephone" : [[${user.telephone}]],
+                        "type":"1",
+                        "lightId":$("#"+id+"hidden").val()
+                },
+                success: function(resultData){
+                    //alert(resultData);
+
+                },
+                error:function(xhr,status,error){
+                        alert("操作失败！异常：error=" + error);
+                }
+            });
+			
+            
+            
+			}
+
+			//灯光强度
+			$(function() {
+				var $sliderTrack = $('#sliderTrack'),
+					$sliderHandler = $('#sliderHandler'),
+					$sliderValue = $('#sliderValue');
+
+				var totalLen = $('#sliderInner').width(),
+					startLeft = 0,
+					startX = 0;
+
+				$sliderHandler
+					.on('touchstart', function(e) {
+						startLeft = parseInt($sliderHandler.css('left')) * totalLen / 100;
+						startX = e.changedTouches[0].clientX;
+					})
+					.on('touchmove', function(e) {
+						var dist = startLeft + e.changedTouches[0].clientX - startX,
+							percent;
+						dist = dist < 0 ? 0 : dist > totalLen ? totalLen : dist;
+						percent = parseInt(dist / totalLen * 100);
+						$sliderTrack.css('width', percent + '%');
+						$sliderHandler.css('left', percent + '%');
+						$sliderValue.text(percent);
+
+						e.preventDefault();
+					});
+			});
+		</script>
+	</body>
+</html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,42 +8,12 @@
 		<meta name="keywords" content="">
 		<meta name="description" content="">
 		<title>灯光模式-阿拉丁神灯</title>
-		<link href="css/weui.css" rel="stylesheet">
-		<link href="font/iconfont.css" rel="stylesheet">
-		<link href="css/style.css?v=14645" rel="stylesheet">
+		<link href="resources/ald/css/weui.css" th:href="@{/resources/ald/css/weui.css}"  rel="stylesheet">
+	    <link href="resources/ald/font/iconfont.css" th:href="@{/resources/ald/font/iconfont.css}"  rel="stylesheet">
+        <link href="resources/ald/css/style.css?v=14645" th:href="@{/resources/ald/css/style.css?v=14645}" rel="stylesheet">
+
 	</head>
 	<style>
-		.third_useron {
-			width: 38%;
-			margin: 8% 4% 0 4%;
-			display: inline-block;
-			border: 0.5px solid #FD9E44;
-			background-color: #FD9E44;
-			height: 50px;
-			line-height: 50px;
-			vertical-align: middle;
-			font-family: "microsoft yahei";
-			font-size: 1em;
-			vertical-align: middle;
-			color: #ffffff;
-			border-radius: 5px;
-		}
-		
-		.third_useroff {
-			width: 38%;
-			margin: 8% 4% 0 4%;
-			display: inline-block;
-			border: 0.5px solid #FD9E44;
-			height: 50px;
-			line-height: 50px;
-			vertical-align: middle;
-			font-family: "microsoft yahei";
-			font-size: 1em;
-			vertical-align: middle;
-			color: #FD9E44;
-			border-radius: 5px;
-		}
-		
 		.weui-slider__track {
 			background-color: #FD9E44;
 		}
@@ -67,17 +37,17 @@
           </span>
 			</div>
 		</header>
-		<div style="margin-top:50px; padding: 10px 0px 20px 0px;">
-			<div style="text-align: center;">
-				<span class="third_useron" onclick="changespan(this)" id="light1">暖黄光</span>
-				<span class="third_useroff" onclick="changespan(this)" id="light2">青春蓝光</span>
-				<span class="third_useroff" onclick="changespan(this)" id="light3">美红暖光</span>
-				<span class="third_useroff" onclick="changespan(this)" id="light4">温馨粉光</span>
-				<span class="third_useroff" onclick="changespan(this)" id="light5">自然白光</span>
-				<span class="third_useroff" onclick="changespan(this)" id="light6">清新荧光</span>
-			</div>
+		<div style="margin-top: 60px;">
+			<img width="300" height="300"  th:src="@{/resources/ald/img/color_range.png}" id="myimg" style="display:none" alt="range"/>
 		</div>
-
+        
+        <div style="width:300px; height:300px; position:relative; text-align:center; margin:auto; margin-top:0px; margin-bottom:20px;" id="colorRange">    
+        <canvas id="mycanvas" width="300" height="300">
+            你的浏览器不支持html5 Canvas元素。
+        </canvas>
+        <img width="30" height="30" th:src="@{/resources/ald/img/color_picker.png}"  id="picker" style="position:absolute; top:135px; left:135px;" alt="picker" />
+        <div style="text-align: center;color:#ccc;font-size: 0.8rem;margin-top: 10px;">点击选择自己喜欢的灯光颜色</div>
+        </div>
 		<div class="light_deg">
 			<div class="weui-slider-box">
 				<div><i class="icon iconfont icon-dengguang-jian x3" style="color:#FD9E44;"></i></div>
@@ -90,26 +60,63 @@
 				<div><i class="icon iconfont icon-juguangdeng x3" style="color:#FD9E44;"></i></div>
 			</div>
 		</div>
-
-		<script src="js/zepto.min.js"></script>
-		<script src="js/weui.min.js"></script>
-		<script>
-			function changespan(obj) {
-				var id = obj.id;
-				//把所有的档次的样式改为off状态
-				for(var i = 1; i <= 6; i++) {
-					if($("#light" + i).hasClass("third_useron")) {
-						$("#light" + i).removeClass("third_useron");
-						$("#light" + i).addClass("third_useroff");
-					}
-				}
-				//把此时选择的档次改为on状态
-				$("#" + id).removeClass("third_useroff");
-				$("#" + id).addClass("third_useron");
-			}
-
+         <input type="hidden" id="lightbrightness" name="lightbrightness" th:value="(${user.lightbrightness}==null)?'0':${user.lightbrightness}">
+	    <script src="/resources/ald/js/zepto.min.js"  th:src="@{/resources/ald/js/zepto.min.js}"></script>
+	   
+		<script src="js/weui.min.js" th:src="@{/resources/ald/js/weui.min.js}"></script>
+		<script type="text/javascript" th:inline="javascript">
+            //灯光颜色调色盘
+        var RadiusRange = 150;
+		var RadiusPicker = 15;
+		var offsetX = window.screen.width / 2 - RadiusRange;
+		var offsetY = 60;
+		var centerX = offsetX + RadiusRange;
+		var centerY = offsetY + RadiusRange;
+		
+		var colorRange = $('#colorRange')[0];
+		var colorPicker = $('#picker')[0];
+        var myCanvas = $('#mycanvas')[0];
+        var myImg = $('#myimg')[0];
+        var ctx = myCanvas.getContext('2d');
+        myImg.onload = function(){ctx.drawImage(myImg, 0, 0);}
+        
+        colorRange.addEventListener('touchstart', touch, false);	//监听touchstart事件
+        colorRange.addEventListener('touchmove', touch, false);		//监听touchmove事件
+        function touch(e)
+        {
+         	var X = e.touches[0].clientX;
+			var Y = e.touches[0].clientY;
+			var x = X - centerX;
+			var y = Y - centerY;
+            if(Math.sqrt(x*x + y*y) < RadiusRange-5)
+			{
+				colorPicker.style.left = X - offsetX - RadiusPicker +'px';
+				colorPicker.style.top = Y - offsetY - RadiusPicker +'px';
+				
+				var rgba = ctx.getImageData(X-offsetX, Y-offsetY, 1, 1).data;
+				var red = rgba['0'];
+				var green = rgba['1'];
+				var blue = rgba['2'];
+				//以下为异步的ajax提交颜色值 （rgb, 0-255 的元素组，如：[255,255,0]）
+				//$.post('/rgb', {red: red, green: green, blue: blue});
+				 /*未选中*/ 
+		        var href= [[@{/api/develop/home/setLightInstruction.do}]];
+		        href = href ;
+		        //alert("href===" + href);
+		        
+		          $.post(href,{red: red, green: green, blue: blue},function(result){
+                    //alert(result)
+                  });
+		          
+	
+			}  
+			
+			//阻止事件上抛给浏览器
+			event.preventDefault(); 
+        }
 			//灯光强度
 			$(function() {
+				var currentvalue= $("#lightbrightness").val();
 				var $sliderTrack = $('#sliderTrack'),
 					$sliderHandler = $('#sliderHandler'),
 					$sliderValue = $('#sliderValue');
@@ -118,8 +125,14 @@
 					startLeft = 0,
 					startX = 0;
 
+				$sliderTrack.css('width', currentvalue + '%');
+				$sliderHandler.css('left', currentvalue + '%');
+				$sliderValue.text(currentvalue);
+				
+				
 				$sliderHandler
 					.on('touchstart', function(e) {
+						
 						startLeft = parseInt($sliderHandler.css('left')) * totalLen / 100;
 						startX = e.changedTouches[0].clientX;
 					})
@@ -131,8 +144,17 @@
 						$sliderTrack.css('width', percent + '%');
 						$sliderHandler.css('left', percent + '%');
 						$sliderValue.text(percent);
-
+                        
 						e.preventDefault();
+						
+						 var href= [[@{/api/develop/home/setLightbrightness.do}]];
+					        href = href ;
+					        
+					        $.post(href,{brightness:percent},function(result){
+			                    //alert(result);
+			                  });
+					        //alert("href===" + href);
+					       
 					});
 			});
 		</script>

@@ -55,10 +55,10 @@
 				<div class="toparea">
 
 					<div class="setting"><i class="icon iconfont icon-shezhi" style="font-size: 36px;"></i></div>
-					<div id="circle" class="center_status"  th:switch="${user.lstatus}">
+					<div id="circle"  onclick="changeStatus()" th:class="${user.lstatus}? 'center_status light_on' : 'center_status_off light_off'"  th:switch="${user.lstatus}">
 						<div style="font-size:0.6rem; color:#ccc;padding-top:1.5rem;">当前状态</div>
-						<div style="color:#FD9E44;padding-top:0.5rem;font-size:1.2rem;" th:case="0">已关灯</div>
-						<div style="color:#FD9E44;padding-top:0.5rem;font-size:1.2rem;" th:case="1">已开灯</div>
+						<div id="nowStatus" style="color:#FD9E44;padding-top:0.5rem;font-size:1.2rem;" th:case="0">已关灯</div>
+						<div id="nowStatus" style="color:#FD9E44;padding-top:0.5rem;font-size:1.2rem;" th:case="1">已开灯</div>
 					</div>
 					<div style="font-size:0.6rem;color:#fff;margin-top: 10px;">小丁已为您服务23天</div>
 				</div>
@@ -68,21 +68,30 @@
 						<div class="weui-cell__ft" >
 							<input class="weui-switch" id="noname" type="checkbox" th:if="${user.soundcontroler eq '1'}" th:checked="true"></input>
 							<input class="weui-switch" id="noname" type="checkbox" th:if="${user.soundcontroler eq '0'}"></input>
+							<input class="weui-switch" id="noname" type="checkbox" th:if="${user.soundcontroler eq ''}"></input>
 						</div>
 					</a>
-					<a class="weui-cell weui-cell_access" href="./light.html" style="padding:20px 15px;">
+					<a class="weui-cell weui-cell_access" th:href="@{/mobile/light/lightlist.do}" style="padding:20px 15px;">
 						<div class="weui-cell__bd">
 							<p style="color:#999;font-size: 0.9rem;">灯光模式</p>
 						</div>
-						<div style="float:right;font-size:12px;color:#FD9E44;" th:text="${user.ltitle}">温馨黄光</div>
+						<div style="float:right;font-size:12px;color:#FD9E44;"  ></div>
 						<div class="weui-cell__ft"></div>
 					</a>
-					<a class="weui-cell weui-cell_access" href="./song.html" style="padding:20px 15px;">
+					<a class="weui-cell weui-cell_access" href="./song.html" th:href="@{/mobile/music/list.do}"  style="padding:20px 15px;">
 						<div class="weui-cell__bd">
 							<p style="color:#999;font-size: 0.9rem;">选择歌曲</p>
 						</div>
 						<div style="float:right;font-size:12px;color:#FD9E44;" th:text="${user.mtitle}">两只老虎</div>
 						<div class="weui-cell__ft"></div>
+					</a>
+				    <a class="weui-cell weui-cell_switch" style="height:50px;">
+						<div class="weui-cell__bd" style="color:#999;font-size: 0.9rem;">聊天对话</div>
+						<div class="weui-cell__ft">
+						    <input class="weui-switch" id="nonametalk" type="checkbox" th:if="${user.talkstatus eq '1'}" th:checked="true"></input>
+							<input class="weui-switch" id="nonametalk" type="checkbox" th:if="${user.talkstatus eq '0'}"></input>
+							<input class="weui-switch" id="nonametalk" type="checkbox" th:if="${user.talkstatus eq ''}"></input>
+						</div>
 					</a>
 				</div>
 				<!--底部标签-->
@@ -153,8 +162,140 @@
             });
             }
          });  
+         
+         
+         
+         $('#nonametalk').on('click', function () {
+             var hasChk = $('#nonametalk').is(':checked'); 
+             if(hasChk){ 
+             var href= [[@{/api/develop/home/setTalk.do}]];
+             href = href + "?telephone="+[[${user.telephone}]]+"&type=1";
+             $.ajax({ 
+                 url: href, 
+                 context: document.body, 
+                 type : "POST", 
+                 dataType:"text",
+                 contentType:'application/json;charset=UTF-8',
+                 data : {
+                         "telephone" : [[${user.telephone}]],
+                         "type":"1"
+                 },
+                 success: function(resultData){
+                     //alert(resultData);
+
+                 },
+                 error:function(xhr,status,error){
+                         alert("操作失败！异常：error=" + error);
+                 }
+             });
+                /*已选中*/ 
+             }else{ 
+              /*未选中*/ 
+             var href= [[@{/api/develop/home/setTalk.do}]];
+             href = href + "?telephone="+[[${user.telephone}]]+"&type=0";
+             //alert("href===" + href);
+             $.ajax({ 
+                 url: href, 
+                 context: document.body, 
+                 type : "POST", 
+                 dataType:"text",
+                 contentType:'application/json;charset=UTF-8',
+                 data : {
+                         "telephone" : [[${user.telephone}]],
+                         "type":"0"
+                 },
+                 success: function(resultData){
+                     //alert(resultData);
+
+                 },
+                 error:function(xhr,status,error){
+                         alert("操作失败！异常：error=" + error);
+                 }
+             });
+             }
+          });  
            
    });
+   
+   
+ //增加点击开关灯的js
+	//点击事件出发样式变化
+	function changeStatus()
+	{
+		if($('#circle').hasClass("light_on"))
+		{
+			$('#circle').find("[id='nowStatus']").html('已关灯');
+			$('#circle').removeClass("center_status");
+			$('#circle').removeClass("light_on");
+			
+			$('#circle').addClass("light_off");
+			$('#circle').addClass("center_status_off");
+			//发起一个ajax 请求修改后台服务灯光状态，提供给树莓派进行监听并修改状态
+			//...
+			
+			 /*未选中*/ 
+            var href= [[@{/api/develop/home/setLight.do}]];
+            href = href + "?telephone="+[[${user.telephone}]]+"&type=0";
+            //alert("href===" + href);
+            $.ajax({ 
+                url: href, 
+                context: document.body, 
+                type : "POST", 
+                dataType:"text",
+                contentType:'application/json;charset=UTF-8',
+                data : {
+                        "telephone" : [[${user.telephone}]],
+                        "type":"1",
+                        "lightId":""
+                },
+                success: function(resultData){
+                    //alert(resultData);
+
+                },
+                error:function(xhr,status,error){
+                        alert("操作失败！异常：error=" + error);
+                }
+            });
+            
+            
+		}
+		else
+		{
+			$('#circle').find("[id='nowStatus']").html('已开灯');
+			$('#circle').removeClass("center_status_off");
+			$('#circle').removeClass("light_off");
+			
+			$('#circle').addClass("light_on");
+			$('#circle').addClass("center_status");
+			//发起一个ajax 请求修改后台服务灯光状态，提供给树莓派进行监听并修改状态
+			//...
+			
+			 /*未选中*/ 
+            var href= [[@{/api/develop/home/setLight.do}]];
+            href = href + "?telephone="+[[${user.telephone}]]+"&type=1";
+            //alert("href===" + href);
+            $.ajax({ 
+                url: href, 
+                context: document.body, 
+                type : "POST", 
+                dataType:"text",
+                contentType:'application/json;charset=UTF-8',
+                data : {
+                        "telephone" : [[${user.telephone}]],
+                        "type":"0",
+                        "lightId":""
+                },
+                success: function(resultData){
+                    //alert(resultData);
+
+                },
+                error:function(xhr,status,error){
+                        alert("操作失败！异常：error=" + error);
+                }
+            });
+		}
+	}
+	//end
         </script>
 	</body>
 

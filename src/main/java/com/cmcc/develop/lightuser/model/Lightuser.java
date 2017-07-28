@@ -47,8 +47,22 @@ public class Lightuser{
     private String ltitle;
     
     private String cmusictitle;
+    
+    private String talkstatus;//聊天开关状态0关1开
+    
+    private String bofangstatus;//播放模式1、顺序播放 2、随机播放3、单曲
+    
+    private String lightinstructions;//灯光执行指令
 
-    public String getMtitle() {
+    public String getLightinstructions() {
+		return lightinstructions;
+	}
+
+	public void setLightinstructions(String lightinstructions) {
+		this.lightinstructions = lightinstructions;
+	}
+
+	public String getMtitle() {
 		return mtitle;
 	}
 
@@ -201,5 +215,21 @@ public class Lightuser{
     public void setMusic (Music music) {
         this.music=music;
     }
+
+	public String getTalkstatus() {
+		return talkstatus;
+	}
+
+	public void setTalkstatus(String talkstatus) {
+		this.talkstatus = talkstatus;
+	}
+
+	public String getBofangstatus() {
+		return bofangstatus;
+	}
+
+	public void setBofangstatus(String bofangstatus) {
+		this.bofangstatus = bofangstatus;
+	}
 
 }

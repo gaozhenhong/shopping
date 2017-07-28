@@ -1,4 +1,4 @@
-package com.cmcc.develop.api;
+package com.cmcc.develop.controler;
 
 import java.net.URLEncoder;
 import java.util.List;
@@ -39,6 +39,8 @@ public class MemberLoginController extends BaseController
   LightService lightservice = new LightService();
   MusicService musicservice = new MusicService();
 
+  
+  
   @RequestMapping(value={"/mobile/light/member/login"}, method={org.springframework.web.bind.annotation.RequestMethod.GET})
   public String login(Locale locale, HttpServletRequest request, Model model, HttpSession session)
     throws Exception
