@@ -14,7 +14,7 @@
         <script src="/resources/js/jquery-2.0.3.min.js" th:src="@{/resources/js/jquery-2.0.3.min.js}"></script>
         <script src="/resources/ald/js/zepto.min.js" th:src="@{/resources/ald/js/zepto.min.js}"></script>
         <script src="/resources/ald/js/weui.min.js" th:src="@{/resources/ald/js/weui.min.js}"></script>
-        <script th:src="@{/resources/meiTu/js/layer/layer.min.js}"></script>
+        <script th:src="@{/resources/meiTu/js/layer/layer.js}"></script>
 	</head>
 	<body>
 	   <header>
@@ -161,7 +161,7 @@
                 success: function(data){
                 if (data.result == "success") {
  
-                    layer.msg("您已经绑定！即将转跳到个人中心...");
+                    layer.msg("已登录,转跳到个人中心");
                     window.setTimeout("window.location='"+main+"'",1200); 
                 } else {
                 }
@@ -213,7 +213,7 @@
                 success: function(data){
          
                 if (data.result == "success") {
-                    layer.msg("登录成功！即将转跳到个人中心...");
+                    layer.msg("登录成功！转跳到个人中心...");
                     var main= [[@{/mobile/light/sys/home.do}]];
                     window.setTimeout("window.location='"+main+"'",1200); 
                 } else {

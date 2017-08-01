@@ -38,7 +38,7 @@
 			</div>
 		</header>
 		<div style="margin-top: 60px;">
-			<img width="300" height="300"  th:src="@{/resources/ald/img/color_range.png}" id="myimg" style="display:none" alt="range"/>
+			<img width="300px" height="300px"  th:src="@{/resources/ald/img/color_range.png}" id="myimg" style="display:none" alt="range"/>
 		</div>
         
         <div style="width:300px; height:300px; position:relative; text-align:center; margin:auto; margin-top:0px; margin-bottom:20px;" id="colorRange">    
@@ -78,7 +78,7 @@
         var myCanvas = $('#mycanvas')[0];
         var myImg = $('#myimg')[0];
         var ctx = myCanvas.getContext('2d');
-        myImg.onload = function(){ctx.drawImage(myImg, 0, 0);}
+        window.onload = function(){ctx.drawImage(myImg, 0, 0);}
         
         colorRange.addEventListener('touchstart', touch, false);	//监听touchstart事件
         colorRange.addEventListener('touchmove', touch, false);		//监听touchmove事件

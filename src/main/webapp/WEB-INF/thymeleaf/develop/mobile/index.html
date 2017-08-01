@@ -57,8 +57,8 @@
 					<div class="setting"><i class="icon iconfont icon-shezhi" style="font-size: 36px;"></i></div>
 					<div id="circle"  onclick="changeStatus()" th:class="${user.lstatus}? 'center_status light_on' : 'center_status_off light_off'"  th:switch="${user.lstatus}">
 						<div style="font-size:0.6rem; color:#ccc;padding-top:1.5rem;">当前状态</div>
-						<div id="nowStatus" style="color:#FD9E44;padding-top:0.5rem;font-size:1.2rem;" th:case="0">已关灯</div>
-						<div id="nowStatus" style="color:#FD9E44;padding-top:0.5rem;font-size:1.2rem;" th:case="1">已开灯</div>
+						<div id="nowStatus" style="padding-top:0.5rem;font-size:1.2rem;" th:case="0">已关灯</div>
+						<div id="nowStatus" style="padding-top:0.5rem;font-size:1.2rem;" th:case="1">已开灯</div>
 					</div>
 					<div style="font-size:0.6rem;color:#fff;margin-top: 10px;">小丁已为您服务23天</div>
 				</div>
