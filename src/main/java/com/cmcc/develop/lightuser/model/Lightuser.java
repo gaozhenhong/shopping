@@ -38,7 +38,7 @@ public class Lightuser{
     
     private String soundcontroler;
     
-    private String lightbrightness;
+    private String lbrightness;
     
     private Music currentmusic;
     
@@ -52,14 +52,14 @@ public class Lightuser{
     
     private String bofangstatus;//播放模式1、顺序播放 2、随机播放3、单曲
     
-    private String lightinstructions;//灯光执行指令
+    private String linstructions;//灯光执行指令
 
-    public String getLightinstructions() {
-		return lightinstructions;
+    public String getLinstructions() {
+		return linstructions;
 	}
 
-	public void setLightinstructions(String lightinstructions) {
-		this.lightinstructions = lightinstructions;
+	public void setLinstructions(String linstructions) {
+		this.linstructions = linstructions;
 	}
 
 	public String getMtitle() {
@@ -86,12 +86,12 @@ public class Lightuser{
 		this.cmusictitle = cmusictitle;
 	}
 
-	public String getLightbrightness() {
-		return lightbrightness;
+	public String getLbrightness() {
+		return lbrightness;
 	}
 
-	public void setLightbrightness(String lightbrightness) {
-		this.lightbrightness = lightbrightness;
+	public void setLbrightness(String lbrightness) {
+		this.lbrightness = lbrightness;
 	}
 
 	public Music getCurrentmusic() {

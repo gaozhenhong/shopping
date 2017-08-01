@@ -764,7 +764,7 @@ public class DbAdapter {
 				String propertyName = properties[i].getName();
 				if (propertyName.equals("class"))
 					continue;
-				 logger.info(properties[i].getName()+":"+properties[i].getPropertyType());
+				 //logger.info(properties[i].getName()+":"+properties[i].getPropertyType());
 				Object targetPropertyValue = getPropertyFormMap(properties[i].getPropertyType(), propertyName, rsValueMap, 1);
 				// logger.info(targetPropertyValue);
 				if (targetPropertyValue == null) {

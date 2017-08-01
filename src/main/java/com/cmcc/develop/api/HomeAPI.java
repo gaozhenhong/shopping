@@ -263,7 +263,7 @@ public class HomeApi extends BaseController{
     		if(user!=null){
     			System.out.println("brightness"+brightness);
         		user = service.getByTelphone(user.getTelephone());
-        		user.setLightbrightness(brightness);//灯光亮度
+        		user.setLbrightness(brightness);//灯光亮度
         		service.update(user);
     		}
     		
@@ -298,7 +298,7 @@ public class HomeApi extends BaseController{
     			object.put("blue", blue);
         		user = service.getByTelphone(user.getTelephone());
         		System.out.println("ightinstructions"+object.toString());
-        		user.setLightinstructions(object.toString());
+        		user.setLinstructions(object.toString());
         		service.update(user);
     		}
     		

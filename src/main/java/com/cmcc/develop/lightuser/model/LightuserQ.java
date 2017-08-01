@@ -47,14 +47,14 @@ public class LightuserQ extends PageUtil {
     
     private String bofangstatus;//播放模式1、顺序播放 2、随机播放3、单曲
     
-    private String lightinstructions;//灯光执行指令
+    private String linstructions;//灯光执行指令
     
-    public String getLightinstructions() {
-		return lightinstructions;
+    public String getLinstructions() {
+		return linstructions;
 	}
 
-	public void setLightinstructions(String lightinstructions) {
-		this.lightinstructions = lightinstructions;
+	public void setLinstructions(String linstructions) {
+		this.linstructions = linstructions;
 	}
 
 	public String getBofangstatus() {
@@ -90,11 +90,11 @@ public class LightuserQ extends PageUtil {
 	}
 
 	public String getLightbrightness() {
-		return lightbrightness;
+		return lbrightness;
 	}
 
-	public void setLightbrightness(String lightbrightness) {
-		this.lightbrightness = lightbrightness;
+	public void setLbrightness(String lbrightness) {
+		this.lbrightness = lbrightness;
 	}
 
 	public Music getCurrentmusic() {
@@ -107,7 +107,7 @@ public class LightuserQ extends PageUtil {
 
 	private String soundcontroler;
     
-    private String lightbrightness;
+    private String lbrightness;
     
     private Music currentmusic;
 
@@ -196,9 +196,9 @@ public class LightuserQ extends PageUtil {
             parameterList.add('%' +soundcontroler + '%'); 
         }
         
-        if (lightbrightness != null && !lightbrightness.equals("")){
-            sqlStr += " AND lightbrightness like ?";
-            parameterList.add('%' +lightbrightness + '%'); 
+        if (lbrightness != null && !lbrightness.equals("")){
+            sqlStr += " AND lbrightness like ?";
+            parameterList.add('%' +lbrightness + '%'); 
         }
         
         if (currentmusic != null && !currentmusic.getId().equals("")){
@@ -228,9 +228,9 @@ public class LightuserQ extends PageUtil {
             parameterList.add('%' +bofangstatus + '%'); 
         }
         
-        if (lightinstructions != null && !lightinstructions.equals("")){
-            sqlStr += " AND lightinstructions like ?";
-            parameterList.add('%' +lightinstructions + '%'); 
+        if (linstructions != null && !linstructions.equals("")){
+            sqlStr += " AND linstructions like ?";
+            parameterList.add('%' +linstructions + '%'); 
         }
 
         return sqlStr;

@@ -59,8 +59,9 @@ public class LightuserApi extends BaseController{
     		all.put("bofangstatus", user.getBofangstatus());//播放模式1、顺序播放 2、随机播放3、单曲
     		all.put("lightstatus", user.getLstatus());//灯光状态
     		all.put("soundcontroler", user.getSoundcontroler());//聊天状态0、关闭 1、打开
-    		all.put("lightbrightness", user.getLightbrightness());//灯光明暗
-    		all.put("lightCode", user.getLightinstructions());//灯光执行指令
+    		all.put("lightbrightness", user.getLbrightness());//灯光明暗
+    		all.put("lightCode", user.getLinstructions());//灯光执行指令
+    		System.out.println("lightcode="+user.getLinstructions());
     		all.put("musicid",music==null?"":music.getId());//音乐执行id
     		all.put("musicurl",music==null?"":ResourceUploadUtil.getFileBasePath(request)+""+(new ResourceService().get(Long.valueOf(music.getVideourl())).getResPath()));
     	}catch(Exception e){
