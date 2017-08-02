@@ -146,7 +146,7 @@ public class HomeApi extends BaseController{
         		musichistory.setUsercode(user.getUsercode());
         		historyservice.insert(musichistory);
         		
-        		user.setMusicstatus(status);//设置音乐播放状态
+        		user.setMstatus(status);//设置音乐播放状态
     			user.setMusic(music);
     			user.setMtitle(music.getTitle());
     			user.setCmusictitle(music.getTitle());

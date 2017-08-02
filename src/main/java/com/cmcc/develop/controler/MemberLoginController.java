@@ -142,7 +142,7 @@ public class MemberLoginController extends BaseController
           user.setTelephone(code.getTelephone());
           user.setLoginName(code.getTelephone());
           user.setLstatus("0");
-          user.setMusicstatus("0");
+          user.setMstatus("0");
           user.setSoundcontroler("0");
           userService.update(user);//更新user
           System.out.println("666");
@@ -277,5 +277,13 @@ public class MemberLoginController extends BaseController
 //    }
 //    return jsonObj.getJSONObject("result").getString("error");'
 	  return "";
+  }
+  
+  
+  @RequestMapping(value={"/api/sys/guide.do"})
+  public String guideAction(HttpServletRequest request,
+                            HttpSession session) throws DaoException, RenderException {
+      
+      return "thymeleaf/develop/guide/index";
   }
 }

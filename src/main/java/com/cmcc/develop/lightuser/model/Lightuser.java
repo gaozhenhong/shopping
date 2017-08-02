@@ -24,7 +24,7 @@ public class Lightuser{
 
     private String name;
 
-    private String musicstatus;
+    private String mstatus;
     
     private String lstatus;
 
@@ -166,12 +166,12 @@ public class Lightuser{
         this.name=name;
     }
 
-    public String getMusicstatus() {
-		return musicstatus;
+    public String getMstatus() {
+		return mstatus;
 	}
 
-	public void setMusicstatus(String musicstatus) {
-		this.musicstatus = musicstatus;
+	public void setMstatus(String mstatus) {
+		this.mstatus = mstatus;
 	}
 
 

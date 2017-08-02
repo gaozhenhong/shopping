@@ -89,7 +89,7 @@
        <i class="icon iconfont icon-shunxuxunhuan x3"></i><span style="padding-left: 10px; font-size: 0.8rem;" id="currentbofang" th:text="'正在播放: '+${user.mtitle}">正在播放: 我有一只小毛驴</span>         		 	   
   	</div> 
   	<div class="dostatus">
-  	   <a href="javascript:void(0)" style="color:#fff;"><i id="controler" th:class="(${user.musicstatus}=='0')?'icon iconfont x3 icon-bofang1':'icon iconfont x3 icon-zanting'" onclick="changeStatus(this)"></i></a>
+  	   <a href="javascript:void(0)" style="color:#fff;"><i id="controler" th:class="(${user.mstatus}=='0')?'icon iconfont x3 icon-bofang1':'icon iconfont x3 icon-zanting'" onclick="changeStatus(this)"></i></a>
   	</div>
   </div>
 <!--播放模式的底部弹出菜单-->
@@ -248,7 +248,7 @@
 			
 				 /*未选中*/ 
 		        var href= [[@{/api/develop/home/setMusic.do}]];
-		        href = href + "?telephone="+[[${user.telephone}]]+"&status=0&musicId="+id;
+		        href = href + "?telephone="+[[${user.telephone}]]+"&status=1&musicId="+id;
 		        //alert("href===" + href);
 		        $.ajax({ 
 		            url: href, 
@@ -273,7 +273,7 @@
 			$(obj).addClass("icon-zanting");
 			 /*未选中*/ 
 	        var href= [[@{/api/develop/home/setMusic.do}]];
-	        href = href + "?telephone="+[[${user.telephone}]]+"&status=1&musicId="+id;
+	        href = href + "?telephone="+[[${user.telephone}]]+"&status=0&musicId="+id;
 	        //alert("href===" + href);
 	        $.ajax({ 
 	            url: href, 

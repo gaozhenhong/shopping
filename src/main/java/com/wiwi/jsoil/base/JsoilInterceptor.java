@@ -43,6 +43,7 @@ public class JsoilInterceptor
     guestPermissionFileList.add("sendverifycode.do");
     guestPermissionFileList.add("registerAction.do");
     guestPermissionFileList.add("bdcheck.do");
+    guestPermissionFileList.add("guide.do");
     
 
     logger = LoggerFactory.getLogger(JsoilInterceptor.class);

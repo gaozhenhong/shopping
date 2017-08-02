@@ -1,375 +1,649 @@
+/* -------------------------------- 
+
+Primary style
+
+-------------------------------- */
+*, *::after, *::before {
+  box-sizing: border-box;
+}
+
+
+
+
+
 body {
-	background-color: #FDF5ED;
+  font-size: 1.6rem;
+  font-family: "Open Sans", sans-serif;
+  color: #363558;
+  background-color: #1c1726;
 }
 
 a {
-	text-decoration: none;
+  color: #544173;
+  text-decoration: none;
 }
 
-a:visited {
-	text-decoration: none;
-	/*指已经访问过的链接*/
+h1, h2 {
+  font-family: "Vollkorn", serif;
 }
 
-a:hover {
-	text-decoration: none;
-	/*指鼠标在链接*/
+/* -------------------------------- 
+
+Patterns - reusable parts of our design
+
+-------------------------------- */
+.overflow-hidden {
+  overflow: hidden;
 }
 
-a:active {
-	text-decoration: none;
-	/* 指正在点的链接*/
-}
- ul {
-    list-style: none;
-}
-.mb-0 {
-	margin-bottom: 0px!important;
-}
+/* -------------------------------- 
 
-.mt-0 {
-	margin-top: 0px!important;
-}
+Header
 
-.mt-10 {
-	margin-top: 10px;
-}
-
-.mb-5 {
-	margin-bottom: 5px;
-}
-
-.mb-10 {
-	margin-bottom: 10px;
-}
-
-.mb-20 {
-	margin-bottom: 20px;
-}
-
-.mb-30 {
-	margin-bottom: 30px;
-}
-
-.mb-40 {
-	margin-bottom: 40px;
-}
-
-.mt-20 {
-	margin-top: 20px;
-}
-
-.mt-30 {
-	margin-top: 30px;
-}
-
-.mt-40 {
-	margin-top: 40px;
-}
-
-.ml-5 {
-	margin-left: 5px;
-}
-
-.ml-10 {
-	margin-left: 10px;
-}
-
-.mr-5 {
-	margin-right: 5px;
-}
-
-.mr-10 {
-	margin-right: 10px;
-}
-
-.mr-20 {
-	margin-right: 20px;
-}
-
-.x1 {
-	font-size: 14px;
-}
-
-.x2 {
-	font-size: 18px;
-}
-
-.x3 {
-	font-size: 22px;
-}
-
-.x4 {
-	font-size: 26px;
-}
-
-.x5 {
-	font-size: 30px;
-}
-
-.x6 {
-	font-size: 34px;
-}
-
-.x7 {
-	font-size: 38px;
-}
-
-.bb-0 {
-	border-bottom: 0;
-}
-
-.pt-0 {
-	padding-top: 0!important;
-}
-
-.pt-10 {
-	padding-top: 10px;
-}
-
-.m_main-outlet {
-	margin: auto;
-	width: 100%;
-}
-/*首页*/
-#m_container {
-	width: 100%;
-}
-
-.toparea {
-	height: 14rem;
-	padding-top: 30px;
-	background-color: #FD9E44;
-	background-size: 100%;
-	text-align: center;
-	background: -webkit-linear-gradient(#FFE07B, #FD9E44);
-	/* Safari 5.1 - 6.0 */
-	background: -o-linear-gradient(#FFE07B, #FD9E44);
-	/* Opera 11.1 - 12.0 */
-	background: -moz-linear-gradient(#FFE07B, #FD9E44);
-	/* Firefox 3.6 - 15 */
-	background: linear-gradient(#FFE07B, #FD9E44);
-	/* 标准的语法 */
-}
-
-.center_status {
-	margin-top: 1.8rem;
-	width: 120px;
-	height: 120px;
-	background-color: #fff;
-	border-radius: 100%;
-	border: 3px solid #FD9E44;
-	text-align: center;
-}
-
-.setting {
-	position: absolute;
-	top: 2px;
-	right: 8px;
-	color: #ffffff;
-}
-
-.weui-switch:checked {
-	border-color: #FD9E44;
-	background-color: #FD9E44;
-}
-
-.drawer-close .drawer-hamburger-icon {
-	background-color: #fff;
-}
-
-.drawer-hamburger-icon:after {
-	background-color: #fff;
-}
-
-.drawer-hamburger-icon:before {
-	background-color: #fff;
-}
-
-.p_head img {
-	border: 3px solid #fff;
-	width: 3.2rem;
-	height: 3.2rem;
-	border-radius: 50%;
-	margin: 1.6rem 0 0 8%;
-	display: inline-block;
-}
-
-.drawer_text {
-	padding-top: 1rem;
-	padding-left: 1.5rem;
-	text-decoration: none;
-	color: #666666;
-}
-/*首页结束*/
-
-header {
-    position: fixed;
-    width: 100%;
-    left: 0;
-    right: 0;
-    top: 0;
-    height: 50px;
-    background-color: transparent;
-   
-    z-index: 999;
-}
-header .left {float:left;width:20%; margin-top: 2px;}
-header .left a {color: #fff; position: relative; }
-header .center {width: 60%; margin-left: 20%; text-align:center; margin-top: 14px;}
-header .center a {color: #fff; position: relative;}
-header .right {position:absolute;top:0;right:5px;color:#fff;z-index:9999;}
-/*歌曲分类tab*/
-.publish-nav-group {
-	margin-top:50px;
-    background-color: #fff;
-    line-height: 48px;
-    text-align: center;
-    margin-bottom: 10px;
-    font-size: 0.8rem;
-}
-.publish-nav-group .publish-nav-item {
-    float: left;
-    width: 33.333%;
-	background-color:#ffffff;
-    color: #666;
-    border-bottom: 4px solid #fff;
-}
-.publish-nav-group .publish-nav-item.active {
-    border-bottom: 4px solid #FD9E44;
-}
-/*歌曲列表展示*/
-.topic-list{position:relative;padding:2px 10px;border-bottom:1px solid #ededed;font-family:Arial,Helvetica,sans-serif;}
-
-.gz_list{
-	display:inline-block;
-	width: 100%;
-}
-.list_pic{
-  position: relative;
-  display: inline-block;
+-------------------------------- */
+/*header {
+  height: 170px;
+  line-height: 170px;
   text-align: center;
-  width: 4rem;
-  vertical-align:top;
+  background: #ffffff;
 }
-.list_pic .userlogo{
-	width:60px;
-	height:60px;
-	display: block;	
-    margin: 15px auto;	
+header h1 {
+  font-size: 2.2rem;
+  color: #363558;
 }
-.gz_list .item_list{
-	display:inline-block;
-	padding:25px 10px 15px 10px;
-	vertical-align:top;
-	line-height:20px;
+@media only screen and (min-width: 600px) {
+  header {
+    height: 200px;
+    line-height: 200px;
+  }
+  header h1 {
+    font-size: 3rem;
+  }
+}*/
+
+/* -------------------------------- 
+
+Main content
+
+-------------------------------- */
+.cd-main {
+  overflow-x: hidden;
 }
-.item_list .head-title{
-	font-size:1rem;
-	font-weight:600;
-	color:#666;
+.cd-main::before {
+  /* never visible - this is used in jQuery to check the current MQ */
+  display: none;
+  content: 'mobile';
 }
-.item_list .playcount{
-	font-size:0.8rem;
-	color:#999999;
-	padding-top:3px;
+.cd-main > * {
+  -webkit-transition: -webkit-transform 0.5s 0.4s;
+  -moz-transition: -moz-transform 0.5s 0.4s;
+  transition: transform 0.5s 0.4s;
+}
+.cd-main.fold-is-open > * {
+  /* on mobile - translate .cd-main content to the right when the .cd-folding-panel is open */
+  -webkit-transform: translateX(100%);
+  -moz-transform: translateX(100%);
+  -ms-transform: translateX(100%);
+  -o-transform: translateX(100%);
+  transform: translateX(100%);
+  -webkit-transition: -webkit-transform 0.5s 0s;
+  -moz-transition: -moz-transform 0.5s 0s;
+  transition: transform 0.5s 0s;
+}
+@media only screen and (min-width: 600px) {
+  .cd-main.fold-is-open > * {
+    -webkit-transform: translateX(600px);
+    -moz-transform: translateX(600px);
+    -ms-transform: translateX(600px);
+    -o-transform: translateX(600px);
+    transform: translateX(600px);
+  }
+}
+@media only screen and (min-width: 1100px) {
+  .cd-main::before {
+    /* never visible - this is used in jQuery to check the current MQ */
+    content: 'desktop';
+  }
+  .cd-main.fold-is-open > * {
+    /* reset style - on bigger devices we translate the gallery items */
+    -webkit-transform: translateX(0);
+    -moz-transform: translateX(0);
+    -ms-transform: translateX(0);
+    -o-transform: translateX(0);
+    transform: translateX(0);
+  }
 }
 
-.btn_item {
-	float:right;
-	display: block;
-	color:#666;
-	padding-top:28px;
+.cd-gallery::after {
+  clear: both;
+  content: "";
+  display: table;
 }
-.now_song {
-	padding-left:10px;
-    line-height: 48px;
-	display: inline-block;
-    height: 48px;
-    width: 100%;
-	color:#ffffff;
-    background: #000000;
-    opacity: 0.3;
-    position: fixed;
-    left: 0;
-    bottom: 0px;
-    right: 0px;
-    border-top: 1px solid #D9D9D9;
+.cd-gallery::before {
+  /* this is the dark layer covering the .cd-gallery when the .cd-folding-panel is open */
+  display: block;
+  content: '';
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(28, 23, 38, 0.6);
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: opacity 0.5s 0.4s, visibility 0s 0.9s;
+  -moz-transition: opacity 0.5s 0.4s, visibility 0s 0.9s;
+  transition: opacity 0.5s 0.4s, visibility 0s 0.9s;
 }
-.nowstatus{
-	display: inline-block;
+.fold-is-open .cd-gallery::before {
+  visibility: visible;
+  opacity: 1;
+  -webkit-transition: opacity 0.5s 0s, visibility 0s 0s;
+  -moz-transition: opacity 0.5s 0s, visibility 0s 0s;
+  transition: opacity 0.5s 0s, visibility 0s 0s;
 }
-.dostatus{
-	display: inline-block;
-	float:right;
-	padding-right:20px;
+
+.cd-item {
+  width: 100%;
+  height: 310px;
+  text-align: center;
+  /* Force Hardware Acceleration */
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transition: -webkit-transform 0.5s 0.4s;
+  -moz-transition: -moz-transform 0.5s 0.4s;
+  transition: transform 0.5s 0.4s;
 }
-/*.. 注册登录  ..*/
-.login_box .weui-cells {
-	width: 90%;
-    margin: 0 auto;
-    font-size: 0.7rem;
-    border-radius: 6px;
-    padding: 0.2rem 0;
-    border: 1px solid #eee;
+.cd-item > a {
+  display: table;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
-.login_box .weui-cells:before,.login_box .weui-cells:after {
-	border:0;
+.cd-item > a.dark-text {
+  color: #363558;
 }
-.login_box .buttons {
-	width:90%;
-	margin:0 auto;
-	margin-top:2rem;
+.cd-item > a.dark-text b {
+  border-color: #363558;
 }
-.login_box .iconfont {
-	font-size: 3rem;
-    width: 100%;
-    text-align: center;
-    color: #1aad19;
-    display: inline-block;
-    margin: 2rem 0 1rem 0;
+.cd{
+
+      width: 100%;
+    color: #fff;
+    padding-top: 50px;
 }
-.login_box .tips {
-	padding:0 4%;
-	margin-top:2rem;
+.cd-item:nth-of-type(1) {
+  background-color: #fff;
 }
-.login_box .tips span {
-	font-size:0.6rem;
-	color:#999;
+.cd-item:nth-of-type(2) {
+  background-color: #F5F3F4;
 }
-.login_box .tips span:nth-child(1) {
-	display: block;
-	color:#555;
+.cd-item:nth-of-type(3) {
+  background-color: #fff;
 }
-.login_box .weui-footer {
-	position:absolute;
-	bottom:0.8rem;
+.cd-item:nth-of-type(4) {
+  background-color: #F5F3F4;
+}
+.cd-item:nth-of-type(5) {
+  background-color: #fff;
+}
+.cd-item:nth-of-type(6) {
+  background-color: #F5F3F4;
+}
+.cd-item:nth-of-type(7) {
+  background-color: #fff;
+}
+.cd-item h2 {
+  font-size: 2.2rem;
+}
+.cd-item p {
+  width:46%;margin-left:27%;
+}
+.cd-item img{
 	width:100%;
 }
- /*增加3个开关灯样式类*/
-	    .light_off{
-	    	   color: #ccc;
-	    }
-	    .center_status_off {
-        margin-top: 1.8rem;
-        width: 120px;
-        height: 120px;
-        background-color: #fff;
-        border-radius: 100%;
-        border: 3px solid #ccc;
-        text-align: center;
-        }
-		.light_on{
-			color:#FD9E44;
-		}
-		.center_status_off {
-        margin-top: 1.8rem;
-        width: 120px;
-        height: 120px;
-        background-color: #fff;
-        border-radius: 100%;
-        border: 3px solid #ccc;
-        text-align: center;
-        }
-        /*end*/
+.cd-item b {
+        display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 14px;
+    border-radius: 30px;
+    color: #272D43;
+    border: 1px solid #272D43;
+    padding: 5px 10px 5px 10px;
+	margin-top:30px;
+}
+@media only screen and (min-width: 1100px) {
+  .cd-item {
+    width: 50%;
+    float: left;
+    height: 520px;
+    -webkit-transition: -webkit-transform 0.5s 0.4s;
+    -moz-transition: -moz-transform 0.5s 0.4s;
+    transition: transform 0.5s 0.4s;
+  }
+  .cd-item h2 {
+    font-size: 3rem;
+  }
+  .cd-item p {
+    font-size: 1.6rem;
+  }
+  .cd-item h2, .cd-item p {
+    -webkit-transform: translateY(30px);
+    -moz-transform: translateY(30px);
+    -ms-transform: translateY(30px);
+    -o-transform: translateY(30px);
+    transform: translateY(30px);
+    -webkit-transition: -webkit-transform 0.3s 0.1s;
+    -moz-transition: -moz-transform 0.3s 0.1s;
+    transition: transform 0.3s 0.1s;
+  }
+  .cd-item b {
+    opacity: 0;
+    -webkit-transform: translateY(20px);
+    -moz-transform: translateY(20px);
+    -ms-transform: translateY(20px);
+    -o-transform: translateY(20px);
+    transform: translateY(20px);
+    -webkit-transition: opacity 0.3s 0s, -webkit-transform 0.3s 0s;
+    -moz-transition: opacity 0.3s 0s, -moz-transform 0.3s 0s;
+    transition: opacity 0.3s 0s, transform 0.3s 0s;
+  }
+  .no-touch .cd-item a:hover h2, .no-touch .cd-item a:hover p {
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    -o-transform: translateY(0);
+    transform: translateY(0);
+    -webkit-transition: -webkit-transform 0.3s 0s;
+    -moz-transition: -moz-transform 0.3s 0s;
+    transition: transform 0.3s 0s;
+  }
+  .no-touch .cd-item a:hover b {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    -o-transform: translateY(0);
+    transform: translateY(0);
+    -webkit-transition: opacity 0.3s 0.1s, -webkit-transform 0.3s 0.1s;
+    -moz-transition: opacity 0.3s 0.1s, -moz-transform 0.3s 0.1s;
+    transition: opacity 0.3s 0.1s, transform 0.3s 0.1s;
+  }
+  .fold-is-open .cd-item {
+    -webkit-transition: -webkit-transform 0.5s 0s;
+    -moz-transition: -moz-transform 0.5s 0s;
+    transition: transform 0.5s 0s;
+    -webkit-transform: translateX(-400px);
+    -moz-transform: translateX(-400px);
+    -ms-transform: translateX(-400px);
+    -o-transform: translateX(-400px);
+    transform: translateX(-400px);
+  }
+  .fold-is-open .cd-item:nth-of-type(2n) {
+    -webkit-transform: translateX(400px);
+    -moz-transform: translateX(400px);
+    -ms-transform: translateX(400px);
+    -o-transform: translateX(400px);
+    transform: translateX(400px);
+  }
+}
 
+/* -------------------------------- 
+
+folding panel
+
+-------------------------------- */
+.cd-folding-panel {
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  visibility: hidden;
+  overflow: hidden;
+  -webkit-transition: visibility 0s 0.9s;
+  -moz-transition: visibility 0s 0.9s;
+  transition: visibility 0s 0.9s;
+}
+.cd-folding-panel .fold-left,
+.cd-folding-panel .fold-right {
+  /* the :after elements of .fold-left and .fold-right are the 2 fold sides */
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  /* enable a 3D-space for children elements */
+  -webkit-perspective: 2000px;
+  -moz-perspective: 2000px;
+  perspective: 2000px;
+}
+.cd-folding-panel .fold-left::after,
+.cd-folding-panel .fold-right::after {
+  /* 2 fold sides */
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  /* Force Hardware Acceleration */
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transition: -webkit-transform 0.5s 0.4s, background-color 0.5s 0.4s;
+  -moz-transition: -moz-transform 0.5s 0.4s, background-color 0.5s 0.4s;
+  transition: transform 0.5s 0.4s, background-color 0.5s 0.4s;
+}
+.cd-folding-panel .fold-right {
+  -webkit-perspective-origin: 0% 50%;
+  -moz-perspective-origin: 0% 50%;
+  perspective-origin: 0% 50%;
+}
+.cd-folding-panel .fold-right::after {
+  -webkit-transform-origin: right center;
+  -moz-transform-origin: right center;
+  -ms-transform-origin: right center;
+  -o-transform-origin: right center;
+  transform-origin: right center;
+  -webkit-transform: translateX(-100%) rotateY(-90deg);
+  -moz-transform: translateX(-100%) rotateY(-90deg);
+  -ms-transform: translateX(-100%) rotateY(-90deg);
+  -o-transform: translateX(-100%) rotateY(-90deg);
+  transform: translateX(-100%) rotateY(-90deg);
+  background-color: #c0c3c3;
+}
+.cd-folding-panel .fold-left {
+  /* on mobile only the right fold side is visible */
+  display: none;
+}
+.cd-folding-panel .fold-left::after {
+  background-color: #f9fafa;
+}
+.cd-folding-panel .cd-close {
+  /* 'X' close icon */
+  position: absolute;
+  z-index: 1;
+  display: inline-block;
+  top: 10px;
+  right: 10px;
+  height: 44px;
+  width: 44px;
+  /* image replacement */
+  overflow: hidden;
+  text-indent: 100%;
+  white-space: nowrap;
+  opacity: 0;
+  -webkit-transition: opacity 0.2s 0s;
+  -moz-transition: opacity 0.2s 0s;
+  transition: opacity 0.2s 0s;
+}
+.cd-folding-panel .cd-close::after, .cd-folding-panel .cd-close::before {
+  /* lines of 'X' icon */
+  content: '';
+  position: absolute;
+  height: 3px;
+  width: 32px;
+  left: 50%;
+  top: 50%;
+  background-color: #544173;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transition: opacity 0.2s;
+  -moz-transition: opacity 0.2s;
+  transition: opacity 0.2s;
+}
+.cd-folding-panel .cd-close::after {
+  -webkit-transform: translateX(-50%) translateY(-50%) rotate(45deg);
+  -moz-transform: translateX(-50%) translateY(-50%) rotate(45deg);
+  -ms-transform: translateX(-50%) translateY(-50%) rotate(45deg);
+  -o-transform: translateX(-50%) translateY(-50%) rotate(45deg);
+  transform: translateX(-50%) translateY(-50%) rotate(45deg);
+}
+.cd-folding-panel .cd-close::before {
+  -webkit-transform: translateX(-50%) translateY(-50%) rotate(-45deg);
+  -moz-transform: translateX(-50%) translateY(-50%) rotate(-45deg);
+  -ms-transform: translateX(-50%) translateY(-50%) rotate(-45deg);
+  -o-transform: translateX(-50%) translateY(-50%) rotate(-45deg);
+  transform: translateX(-50%) translateY(-50%) rotate(-45deg);
+}
+.cd-folding-panel.is-open {
+  visibility: visible;
+  -webkit-transition: visibility 0s 0s;
+  -moz-transition: visibility 0s 0s;
+  transition: visibility 0s 0s;
+}
+.cd-folding-panel.is-open .fold-right::after,
+.cd-folding-panel.is-open .fold-left::after {
+  -webkit-transform: translateX(0);
+  -moz-transform: translateX(0);
+  -ms-transform: translateX(0);
+  -o-transform: translateX(0);
+  transform: translateX(0);
+  -webkit-transition: -webkit-transform 0.5s 0s, background-color 0.5s 0s;
+  -moz-transition: -moz-transform 0.5s 0s, background-color 0.5s 0s;
+  transition: transform 0.5s 0s, background-color 0.5s 0s;
+}
+.cd-folding-panel.is-open .fold-right::after {
+  background-color: #f9fafa;
+}
+.cd-folding-panel.is-open .cd-close {
+  opacity: 1;
+  -webkit-transition: opacity 0.2s 0.5s;
+  -moz-transition: opacity 0.2s 0.5s;
+  transition: opacity 0.2s 0.5s;
+}
+@media only screen and (min-width: 600px) {
+  .cd-folding-panel {
+    width: 600px;
+  }
+}
+@media only screen and (min-width: 1100px) {
+  .cd-folding-panel {
+    left: 50%;
+    right: auto;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    transform: translateX(-50%);
+    width: 800px;
+  }
+  .cd-folding-panel .fold-left,
+  .cd-folding-panel .fold-right {
+    width: 50%;
+    float: left;
+    height: 100%;
+  }
+  .cd-folding-panel .fold-right {
+    /* change perspective-origin so that the 2 fold sides have the same vanishing point */
+    -webkit-perspective-origin: 0% 50%;
+    -moz-perspective-origin: 0% 50%;
+    perspective-origin: 0% 50%;
+  }
+  .cd-folding-panel .fold-right::after {
+    -webkit-transform-origin: right center;
+    -moz-transform-origin: right center;
+    -ms-transform-origin: right center;
+    -o-transform-origin: right center;
+    transform-origin: right center;
+    -webkit-transform: translateX(-100%) rotateY(-90deg);
+    -moz-transform: translateX(-100%) rotateY(-90deg);
+    -ms-transform: translateX(-100%) rotateY(-90deg);
+    -o-transform: translateX(-100%) rotateY(-90deg);
+    transform: translateX(-100%) rotateY(-90deg);
+  }
+  .cd-folding-panel .fold-left {
+    display: block;
+    /* change perspective-origin so that the 2 fold sides have the same vanishing point */
+    -webkit-perspective-origin: 100% 50%;
+    -moz-perspective-origin: 100% 50%;
+    perspective-origin: 100% 50%;
+  }
+  .cd-folding-panel .fold-left::after {
+    -webkit-transform-origin: left center;
+    -moz-transform-origin: left center;
+    -ms-transform-origin: left center;
+    -o-transform-origin: left center;
+    transform-origin: left center;
+    -webkit-transform: translateX(100%) rotateY(90deg);
+    -moz-transform: translateX(100%) rotateY(90deg);
+    -ms-transform: translateX(100%) rotateY(90deg);
+    -o-transform: translateX(100%) rotateY(90deg);
+    transform: translateX(100%) rotateY(90deg);
+  }
+}
+
+.cd-fold-content {
+	display:none;
+  position: absolute;
+  top: 0;
+  left: 4%;
+  height: 100%;
+  width: 92%;
+   padding-top: 10px;
+  visibility: hidden;
+  -webkit-transition: visibility 0s 0.4s;
+  -moz-transition: visibility 0s 0.4s;
+  transition: visibility 0s 0.4s;
+}
+.cd-fold-content i{
+	    width: 145px;
+    height: 2px;
+    display: block;
+    background: #909091;
+	margin-bottom:15px;
+}
+.cd-fold-content > * {
+  opacity: 0;
+  -webkit-transform: translateY(20px);
+  -moz-transform: translateY(20px);
+  -ms-transform: translateY(20px);
+  -o-transform: translateY(20px);
+  transform: translateY(20px);
+}
+.cd-fold-content h2 {
+font-size: 32px;
+    line-height: 60px;
+  -webkit-transition: -webkit-transform 0.2s 0.2s, opacity 0.2s 0.2s;
+  -moz-transition: -moz-transform 0.2s 0.2s, opacity 0.2s 0.2s;
+  transition: transform 0.2s 0.2s, opacity 0.2s 0.2s;
+}
+.cd-fold-content p, .cd-fold-content em {
+  line-height: 1.6;
+}
+.cd-fold-content em {
+  display: inline-block;
+  margin: 1em 0;
+  font-family: "Vollkorn", serif;
+  font-size: 1.8rem;
+  color: #7a78ae;
+  -webkit-transition: -webkit-transform 0.2s 0.1s, opacity 0.2s 0.1s;
+  -moz-transition: -moz-transform 0.2s 0.1s, opacity 0.2s 0.1s;
+  transition: transform 0.2s 0.1s, opacity 0.2s 0.1s;
+}
+.cd-fold-content p {
+  color:#8F8F8F;
+  font-size: 16px;
+  margin-bottom:18px;
+  line-height:1.8;
+  -webkit-transition: -webkit-transform 0.2s 0s, opacity 0.2s 0s;
+  -moz-transition: -moz-transform 0.2s 0s, opacity 0.2s 0s;
+  transition: transform 0.2s 0s, opacity 0.2s 0s;
+}
+.cd-fold-content b{
+	font-weight:bold;color:#272d43;margin-bottom:18px;
+}
+.cd-fold-content img{
+	width: 70%;
+    margin: 0px auto;
+    display: block;
+}
+.is-open .cd-fold-content {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  visibility: visible;
+  -webkit-transition: visibility 0s 0.5s;
+  -moz-transition: visibility 0s 0.5s;
+  transition: visibility 0s 0.5s;
+}
+.is-open .cd-fold-content > * {
+  opacity: 1;
+  -webkit-transform: translateY(0);
+  -moz-transform: translateY(0);
+  -ms-transform: translateY(0);
+  -o-transform: translateY(0);
+  transform: translateY(0);
+}
+.is-open .cd-fold-content h2 {
+  -webkit-transition: -webkit-transform 0.2s 0.5s, opacity 0.2s 0.5s;
+  -moz-transition: -moz-transform 0.2s 0.5s, opacity 0.2s 0.5s;
+  transition: transform 0.2s 0.5s, opacity 0.2s 0.5s;
+}
+.is-open .cd-fold-content em {
+  -webkit-transition: -webkit-transform 0.2s 0.6s, opacity 0.2s 0.6s;
+  -moz-transition: -moz-transform 0.2s 0.6s, opacity 0.2s 0.6s;
+  transition: transform 0.2s 0.6s, opacity 0.2s 0.6s;
+}
+.is-open .cd-fold-content p {
+  -webkit-transition: -webkit-transform 0.2s 0.7s, opacity 0.2s 0.7s;
+  -moz-transition: -moz-transform 0.2s 0.7s, opacity 0.2s 0.7s;
+  transition: transform 0.2s 0.7s, opacity 0.2s 0.7s;
+}
+@media only screen and (min-width: 600px) {
+  .cd-fold-content h2 {
+    font-size: 3.2rem;
+  }
+}
+@media only screen and (min-width: 1100px) {
+  .cd-fold-content {
+    padding: 4em;
+  }
+  .cd-fold-content > * {
+    -webkit-transform: translateY(40px);
+    -moz-transform: translateY(40px);
+    -ms-transform: translateY(40px);
+    -o-transform: translateY(40px);
+    transform: translateY(40px);
+  }
+  .cd-fold-content em {
+    font-size: 2.2rem;
+  }
+  .cd-fold-content p {
+    font-size: 1.6rem;
+  }
+}
+
+/* -------------------------------- 
+
+Javascript disabled
+
+-------------------------------- */
+.no-js .cd-fold-content.single-page {
+  position: static;
+  visibility: visible;
+  height: auto;
+  background-color: #dadcdc;
+}
+.no-js .cd-fold-content.single-page > * {
+  opacity: 1;
+  -webkit-transform: translateY(0);
+  -moz-transform: translateY(0);
+  -ms-transform: translateY(0);
+  -o-transform: translateY(0);
+  transform: translateY(0);
+}

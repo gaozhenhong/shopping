@@ -55,7 +55,7 @@ public class LightuserApi extends BaseController{
     		
     
     		all.put("talkstatus", user.getTalkstatus());
-    		all.put("musicstatus", user.getMusicstatus());
+    		all.put("musicstatus", user.getMstatus());
     		all.put("bofangstatus", user.getBofangstatus());//播放模式1、顺序播放 2、随机播放3、单曲
     		all.put("lightstatus", user.getLstatus());//灯光状态
     		all.put("soundcontroler", user.getSoundcontroler());//聊天状态0、关闭 1、打开
@@ -132,7 +132,7 @@ public class LightuserApi extends BaseController{
 
     //提供给硬件设置当前播放音乐
     @RequestMapping(value = "setCurrentMusic.do")
-    public String setCurrentMusic(@RequestParam String usercode,@RequestParam String musicId,HttpServletRequest request) throws Exception {
+    public String setCurrentMusic(@RequestParam String usercode,@RequestParam String musicId,@RequestParam String ifend,HttpServletRequest request) throws Exception {
         JSONObject all = new JSONObject();
     	try{
     		Lightuser user = service.getByUsercode(usercode);
