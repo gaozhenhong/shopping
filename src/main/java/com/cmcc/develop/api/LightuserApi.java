@@ -156,7 +156,29 @@ public class LightuserApi extends BaseController{
         return all.toString();
     }
 
- 
+   /**
+    * 修改灯光状态
+    * @param usercode
+    * @param type
+    * @param request
+    * @return
+    * @throws Exception
+    */
+    @RequestMapping(value = "setLight.do" ,produces ={ "application/json; charset=utf-8"})
+    public String setLight(@RequestParam String usercode,@RequestParam String type,HttpServletRequest request) throws Exception {
+        JSONObject all = new JSONObject();
+    	try{
+    		Lightuser user = service.getByUsercode(usercode);
+    		user.setLstatus(type);//0、关灯 1、开灯
+    		service.update(user);//更新
+    		//添加灯光历史
+    		all.put("result", "操作成功");
+    	}catch(Exception e){
+    		e.printStackTrace();
+    		all.put("result", "操作失败");
+    	}
+        return all.toString();
+    }
 
 
 }
